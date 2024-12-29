@@ -47,7 +47,7 @@ function New({Cancel_click,Submit_Click}){
             <input type='text' placeholder='Placeholder\Instruction' name='placeholder' onChange={(e) => handleChanges(e)} required /><br/>
 
             <button type="button" className="Cancel-b" onClick={Cancel_click}>Cancel</button>
-            <button type="submit" className="Submit-b" >Submit</button>
+            <button type="submit" className="Submit-b" >Save</button>
         
         </form>
 

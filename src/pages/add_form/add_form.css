@@ -17,6 +17,10 @@ button{
     width:43px;
     height: 43px;
     padding: 0 10 0 0 px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
   }
   
   .new_form:hover{
@@ -62,7 +66,7 @@ button{
   
   .icon_align{
     font-size: 25px;
-    margin-top: 5px;
+    margin-top: 9px;
   }
   
   .add-event-name{
@@ -73,3 +77,17 @@ button{
   .own-form-text{
     color: #1C5DCA;
   }
+
+.save_form{
+    margin-top: 30px;
+    background-color: #1C5DCA;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.Add_Form{
+    display: flex;
+    flex-direction: column;
+}

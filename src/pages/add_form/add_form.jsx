@@ -78,7 +78,7 @@ function Add_form() {
 
 
   return (
-    <div className="App">
+    <div className="Add_Form">
       <h1 className='add-event-name'>Add Event Name</h1>
       <h2 className='own-form-text'>Create your own form</h2>
 
@@ -99,7 +99,9 @@ function Add_form() {
         {showexist && <Existing exist_click={handleCancel} save_input={handleSave} exist_input={exist_input} />}
         {shownew && <New Cancel_click={handleCancel} Submit_Click={handleSave}  />}
       </div>
-      
+      <button className='save_form'>
+        save
+      </button>
     </div>
   );
 }
