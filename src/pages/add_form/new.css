@@ -1,0 +1,49 @@
+
+
+form{
+    background-color: #1cca57;
+    border-radius: 10px;
+    margin: auto;
+    width:27%;
+    align-items: center;
+}
+select{
+    margin: 5px;
+    background-color: white;
+    color: black;
+    align-items: center;
+}
+
+input{
+    border-radius: 5px;
+    border-color: white;
+    margin: 5px;
+    padding: 0px 0px 0px 20px;;
+    width:85%;
+    height:33px;
+}
+
+.Submit-b{
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,0.1), 0 1px 6px 0 rgba(0,0,0,0.19);
+    background-color: rgb(15, 201, 15);
+    border-width: 5px;
+    border-color: black;
+    color: white;
+    margin:20px 0px 15px 35px;
+}
+
+
+.Cancel-b{
+    background-color:white;
+    color: #34d56a;
+    margin:20px 35px 15px 0px;
+}
+
+.new_dropdown{
+    margin-top: 20px;
+    font-size: 1em;
+    height: 40px;
+    width:180px;
+    background-color: white;
+    color: black;
+}
