@@ -3,29 +3,31 @@ import Navbar from '../../components/navbar/navbar';
 import Ell from '../../assets/images/ellipse.jpg';
 
 const Apply = () => {
-  // State to manage form inputs
   const [formData, setFormData] = useState({
     name: '',
     aadhar: '',
     phone: '',
-    panchayath: '',
+    address: '',
+    healthIssue: '',
+    hospital: '',
+    expenditure: '',
     ward: '',
     applicant: '',
     relation: '',
-    subjectTitle: '',
+    subject: '',
   });
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form Submitted:', formData);
-
+    console.log('Form submitted:', formData);
   };
 
   return (
@@ -38,9 +40,6 @@ const Apply = () => {
         <div className="flex flex-col justify-center items-center">
           <img src={Ell} className="w-[20vw]" alt="Ellipse" />
           <div className="absolute text-white font-redHat font-medium text-center justify-center flex flex-col">
-            <h1 className="text-[3rem] text-center">
-              Chief Minister's National Relief Fund
-            </h1>
             <h1 className="text-6xl font-semibold text-center">CMNRF</h1>
           </div>
         </div>
@@ -67,7 +66,8 @@ const Apply = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="mt-1 block w-full bg-[#e9dfdf] h-[40px] px-[8px] rounded-md border-gray-300 shadow-xl"
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
                 />
               </div>
               <div className="mt-[3vh]">
@@ -81,6 +81,7 @@ const Apply = () => {
                   value={formData.aadhar}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
                 />
               </div>
               <div className="mt-[3vh]">
@@ -94,82 +95,73 @@ const Apply = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
                 />
               </div>
             </div>
 
             {/* Group 2: Scrolling Inputs */}
             <div>
-              <div className="mt-[3vh]">
-                <label htmlFor="panchayath" className="block text-lg font-medium text-gray-700">
-                  PANCHAYATH:
+              <div className="mt-[vh]">
+                <label htmlFor="address" className="block text-lg font-medium text-gray-700">
+                  ADDRESS:
                 </label>
-                <input
-                  type="text"
-                  id="panchayath"
-                  name="panchayath"
-                  value={formData.panchayath}
+                <textarea
+                  id="address"
+                  name="address"
+                  value={formData.address}
                   onChange={handleChange}
-                  className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[100px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
                 />
               </div>
-              <div className="mt-[3vh]">
-                <label htmlFor="ward" className="block text-lg font-medium text-gray-700">
-                  WARD NUMBER:
+
+              <div className="mt-[vh]">
+                <label htmlFor="healthIssue" className="block text-lg font-medium text-gray-700">
+                  HEALTH ISSUE:
                 </label>
-                <input
-                  type="text"
-                  id="ward"
-                  name="ward"
-                  value={formData.ward}
+                <textarea
+                  id="healthIssue"
+                  name="healthIssue"
+                  value={formData.healthIssue}
                   onChange={handleChange}
-                  className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[100px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
                 />
               </div>
-              <div className="mt-[3vh]">
-                <label htmlFor="applicant" className="block text-lg font-medium text-gray-700">
-                  APPLICANT:
+
+              <div className="mt-[vh]">
+                <label htmlFor="hospital" className="block text-lg font-medium text-gray-700">
+                  HOSPITAL:
                 </label>
                 <input
-                  type="text"
-                  id="applicant"
-                  name="applicant"
-                  value={formData.applicant}
+                  id="hospital"
+                  name="hospital"
+                  value={formData.hospital}
                   onChange={handleChange}
-                  className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
                 />
               </div>
-              <div className="mt-[3vh]">
-                <label htmlFor="relation" className="block text-lg font-medium text-gray-700">
-                  If Applicant is relative mention the blood relation below:
+
+              <div className="mt-[vh]">
+                <label htmlFor="expenditure" className="block text-lg font-medium text-gray-700">
+                  EXPECTED EXPENDITURE:
                 </label>
                 <input
-                  type="text"
-                  id="relation"
-                  name="relation"
-                  value={formData.relation}
-                  onChange={handleChange} 
-                  className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
-                />
-              </div>
-              <div className="mt-[3vh]">
-                <label htmlFor="subjectTitle" className="block text-lg font-medium text-gray-700">
-                  SUBJECT TITLE:
-                </label>
-                <input
-                  type="text"
-                  id="subjectTitle"
-                  name="subjectTitle"
-                  value={formData.subjectTitle}
+                  id="expenditure"
+                  name="expenditure"
+                  value={formData.expenditure}
                   onChange={handleChange}
-                  className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-md shadow-lg hover:bg-blue-600"
+              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600"
             >
               Submit
             </button>
