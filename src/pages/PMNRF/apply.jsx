@@ -17,7 +17,7 @@ const defaultFormData = {
 const Apply = () => {
   const [formData, setFormData] = useState(defaultFormData);
 
-  const [createApplicationMutation, { data, loading, error }] = useCreateApplicationMutation();
+  const [createApplicationMutation ] = useCreateApplicationMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
