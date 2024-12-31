@@ -1,0 +1,43 @@
+select{
+    font-size: 1.4em;
+    color: white;
+    background-color: rgb(252, 191, 38);
+    border-radius: 10px;
+    width: 25%;
+    height: 45px;
+    align-items: center;
+}
+
+.exist-dropdown{
+    display: flex; 
+    flex-direction: column;               /* Use flexbox layout */
+    justify-content:space-evenly;      /* Centers text horizontally */
+    align-items: center;          /* Vertically center text and icon */
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;           /* Needed for absolute positioning of the icon */
+    
+}
+
+.exist-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;   
+    height: 50px;
+    font-size: 1.3em;
+    border-radius: 5px;
+    margin:0 ;
+    width:350px;
+    background-color: rgb(252, 191, 38);
+    color: white;
+}
+
+.exist_text{
+    margin-left: 40%;
+}
+
+.arrowdown{ 
+    font-size: 30px;
+    margin-right: 5%;
+}

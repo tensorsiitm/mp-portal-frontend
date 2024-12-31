@@ -1,0 +1,24 @@
+.new-exist-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new{
+    background-color: #1cca57;
+    width: 170px;
+    height: 40px;
+    margin: 10px;
+  }
+  
+.existing{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(252, 191, 38);
+    width: 170px;
+    height: 40px;
+    margin: 10px;
+}
+
+

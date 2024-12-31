@@ -1,0 +1,90 @@
+button {
+    font-size: 1.4rem;
+    width: 130px;
+    height: 35px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    margin: 10px;
+}
+
+.new_form {
+    border-radius: 25px;
+    color: white;
+    background-color: rgb(189, 189, 189);
+    width: 43px;
+    height: 43px;
+    padding: 0 10 0 0 px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+}
+
+.new_form:hover {
+    background-color: rgb(129, 129, 129);
+}
+
+ol {
+    padding: 20px 0;
+    width: 50%;
+    margin: auto;
+}
+li {
+    margin: auto;
+    width: 100%;
+    font-size: 2rem;
+    padding: 15px;
+    background-color: hsl(0, 0%, 97%);
+    /*margin: 10px 50px 0px 140px;*/
+    border: 3px solid hsla(0, 0%, 85%, 0.75);
+    border-radius: 5px;
+    display: flex;
+}
+
+.inputLi {
+    margin: 10px;
+    background-color: #1c5dca;
+    color: rgb(231, 230, 230);
+    border-radius: 10px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete_input {
+    margin: 1px;
+    background-color: transparent;
+    color: rgb(231, 230, 230);
+}
+
+.icon_align {
+    font-size: 25px;
+    margin-top: 9px;
+}
+
+.add-event-name {
+    color: #1c5dca;
+    font-size: 40px;
+}
+
+.own-form-text {
+    color: #1c5dca;
+}
+
+.save_form {
+    margin-top: 30px;
+    background-color: #1c5dca;
+    color: white;
+    /* display: flex; */
+    /* flex-direction: column; */
+    align-self: center;
+}
+
+.Add_Form {
+    display: flex;
+    flex-direction: column;
+}
