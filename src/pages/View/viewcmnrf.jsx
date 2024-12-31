@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useGetCmnrfApplicationsQuery } from '../../generated/graphql.tsx';
 
 const data = [
   {
@@ -31,40 +32,50 @@ const data = [
 ];
 
 const Viewcmnrf = () => {
+  const [CMNRFData, setCMNRFData] = useState([]);
+  const { data, loading, error } = useGetCmnrfApplicationsQuery();
+
+  useEffect(() => {
+    if (data) {
+      setCMNRFData(data.getCMNRFApplications);
+    }
+  }, [data]);
+
   return (
     <div className="p-4 flex flex-col justify-center items-center text-left">
-    <h1 className="text-2xl font-bold mb-4">CMNRF Applications</h1>
-    <div className="flex flex-col gap-8">
-      {data.map((item, index) => (
-        <div
-          key={index}
-          className="w-[50vw] border p-4  rounded-lg shadow-md bg-gray-100"
-        >
-          <p>
-            <strong>Name:</strong> {item.name}
-          </p>
-          <p>
-            <strong>Adhaar:</strong> {item.adhaar}
-          </p>
-          <p>
-            <strong>Phone:</strong> {item.phone}
-          </p>
-          <p>
-            <strong>Address:</strong> {item.address}
-          </p>
-          <p>
-            <strong>Health Issue:</strong> {item.healthIssue}
-          </p>
-          <p>
-            <strong>Hospital:</strong> {item.hospital}
-          </p>
-          <p>
-            <strong>Expected Expenditure:</strong> {item.expectedExpenditure}
-          </p>
-        </div>
-      ))}
+      <h1 className="text-2xl font-bold mb-4">CMNRF Applications</h1>
+      <div className="flex flex-col gap-8">
+        {CMNRFData.length > 0 ? CMNRFData.map((item, index) => (
+          <div
+            key={index}
+            className="w-[50vw] border p-4  rounded-lg shadow-md bg-gray-100"
+          >
+            <p>
+              <strong>Name:</strong> {item.name}
+            </p>
+            <p>
+              <strong>Adhaar:</strong> {item.adhaar}
+            </p>
+            <p>
+              <strong>Phone:</strong> {item.phone}
+            </p>
+            <p>
+              <strong>Address:</strong> {item.address}
+            </p>
+            <p>
+              <strong>Health Issue:</strong> {item.healthIssue}
+            </p>
+            <p>
+              <strong>Hospital:</strong> {item.hospital}
+            </p>
+            <p>
+              <strong>Expected Expenditure:</strong> {item.expectedExpenditure}
+            </p>
+          </div>
+        )) :
+          <h1>No Data Found!</h1>}
+      </div>
     </div>
-  </div>
   );
 };
 
