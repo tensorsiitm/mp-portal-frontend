@@ -11,6 +11,7 @@ const Navbar = () => {
     try {
       const val = await loginUserMutation({variables: {password}})
       sessionStorage.setItem('logged', val.data.loginUser ?? false)
+      window.location.reload()
     } catch (err) {
       alert('Wrong Password')
     }
