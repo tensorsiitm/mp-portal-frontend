@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Ell from '../../assets/images/ellipse.jpg';
 import Pmnrf from '../../assets/images/PMNRF.jpg';
 import Cmnrf from '../../assets/images/CMNRF.jpg';
-import { IoAddCircle } from "react-icons/io5";
 import Navbar from '../../components/navbar/navbar';
 function Home() {
   const navigate = useNavigate(); 

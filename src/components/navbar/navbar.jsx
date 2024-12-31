@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import { useLoginUserMutation } from '../../generated/graphql.tsx';
 const Navbar = () => {
 
-  const [loginUserMutation, {data}] = useLoginUserMutation()
+  const [loginUserMutation ] = useLoginUserMutation()
 
   const handleClick = async () => {
     const password = prompt('password')

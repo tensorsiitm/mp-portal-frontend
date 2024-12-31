@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import './newInput.css'
 

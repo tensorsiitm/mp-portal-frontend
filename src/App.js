@@ -7,7 +7,7 @@ import Cmnrf from './pages/CMNRF/home';
 import Pmnrf from './pages/PMNRF/home';
 import CMNRFApply from './pages/CMNRF/apply'
 import PMNRFApply from './pages/PMNRF/apply'
-import Add from "./pages/add_form/add_form";
+// import Add from "./pages/add_form/add_form";
 import View from './pages/View/view'
 import ViewP from './pages/View/viewpmnrf'
 import ViewC from './pages/View/viewcmnrf'
