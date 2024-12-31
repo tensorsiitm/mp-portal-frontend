@@ -37,7 +37,7 @@ function Home() {
 
         <div className='flex flex-col justify-center items-center align-middle w-[80vw] gap-[10vh] pt-[8vh]'>
           <div className='flex flex-col justify-center items-center text-center'>
-            <h1 className='text-4xl font-bold'>Dr.DEAN KURIYAKOSE</h1>
+            <h1 className='text-4xl font-bold'>Adv. Dean Kuriakose</h1>
             <p className='text-2xl font-medium mt-[5px]'>Idukki, Member of Parliament</p>
           </div>
 
