@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useGetCmnrfApplicationsQuery } from '../../generated/graphql.tsx';
 
-const data = [
-  {
-    name: 'John Doe',
-    adhaar: '1234-5678-9012',
-    phone: '+91-9876543210',
-    address: '123 Elm Street, Chennai, Tamil Nadu',
-    healthIssue: 'Cardiac Arrest',
-    hospital: 'Apollo Hospitals',
-    expectedExpenditure: '₹5,00,000',
-  },
-  {
-    name: 'Jane Smith',
-    adhaar: '2345-6789-0123',
-    phone: '+91-8765432109',
-    address: '456 Oak Avenue, Mumbai, Maharashtra',
-    healthIssue: 'Fractured Leg',
-    hospital: 'Lilavati Hospital',
-    expectedExpenditure: '₹1,50,000',
-  },
-  {
-    name: 'Rajesh Kumar',
-    adhaar: '3456-7890-1234',
-    phone: '+91-7654321098',
-    address: '789 Pine Lane, Delhi',
-    healthIssue: 'Kidney Failure',
-    hospital: 'AIIMS',
-    expectedExpenditure: '₹8,00,000',
-  },
-];
+// const data = [
+//   {
+//     name: 'John Doe',
+//     adhaar: '1234-5678-9012',
+//     phone: '+91-9876543210',
+//     address: '123 Elm Street, Chennai, Tamil Nadu',
+//     healthIssue: 'Cardiac Arrest',
+//     hospital: 'Apollo Hospitals',
+//     expectedExpenditure: '₹5,00,000',
+//   },
+//   {
+//     name: 'Jane Smith',
+//     adhaar: '2345-6789-0123',
+//     phone: '+91-8765432109',
+//     address: '456 Oak Avenue, Mumbai, Maharashtra',
+//     healthIssue: 'Fractured Leg',
+//     hospital: 'Lilavati Hospital',
+//     expectedExpenditure: '₹1,50,000',
+//   },
+//   {
+//     name: 'Rajesh Kumar',
+//     adhaar: '3456-7890-1234',
+//     phone: '+91-7654321098',
+//     address: '789 Pine Lane, Delhi',
+//     healthIssue: 'Kidney Failure',
+//     hospital: 'AIIMS',
+//     expectedExpenditure: '₹8,00,000',
+//   },
+// ];
 
 const Viewcmnrf = () => {
   const [CMNRFData, setCMNRFData] = useState([]);

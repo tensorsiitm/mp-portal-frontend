@@ -40,7 +40,7 @@ const Apply = () => {
         }
       })
       alert("Submitted");
-      // setFormData(defaultFormData);
+      setFormData(defaultFormData);
     } catch (error) {
       console.log(error);
     }
