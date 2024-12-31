@@ -38,6 +38,9 @@ const Viewpmnrf = () => {
             className="w-[50vw] border p-4  rounded-lg shadow-md bg-gray-100"
           >
             <p>
+              <strong>ID:</strong> {item.id}
+            </p>
+            <p>
               <strong>Name:</strong> {item.name}
             </p>
             <p>
