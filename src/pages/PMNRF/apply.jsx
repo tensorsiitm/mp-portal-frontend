@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/navbar/navbar';
 import Ell from '../../assets/images/ellipse.jpg';
+import { Tagtype, useCreateApplicationMutation } from '../../generated/graphql.tsx';
+
+const defaultFormData = {
+  name: '',
+  aadhaar: '',
+  phone: '',
+  address: '',
+  healthIssue: '',
+  hospital: '',
+  expectedExpenditure: '',
+  tag: Tagtype.Pmnrf
+}
 
 const Apply = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    aadhar: '',
-    phone: '',
-    address: '',
-    healthIssue: '',
-    hospital: '',
-    expenditure: '',
-    ward: '',
-    applicant: '',
-    relation: '',
-    subject: '',
-  });
+  const [formData, setFormData] = useState(defaultFormData);
+
+  const [createApplicationMutation ] = useCreateApplicationMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +27,25 @@ const Apply = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+
+    try {
+      await createApplicationMutation({
+        variables: {
+          data: {
+            ...formData,
+            expectedExpenditure: Number(formData.expectedExpenditure)
+          }
+        }
+      })
+
+      alert('Submitted')
+      setFormData(defaultFormData)
+    } catch(e) {
+      console.log(e)
+    }
   };
 
   return (
@@ -76,9 +94,9 @@ const Apply = () => {
                 </label>
                 <input
                   type="text"
-                  id="aadhar"
-                  name="aadhar"
-                  value={formData.aadhar}
+                  id="aadhaar"
+                  name="aadhaar"
+                  value={formData.aadhaar}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required
@@ -149,9 +167,9 @@ const Apply = () => {
                   EXPECTED EXPENDITURE:
                 </label>
                 <input
-                  id="expenditure"
-                  name="expenditure"
-                  value={formData.expenditure}
+                  id="expectedExpenditure"
+                  name="expectedExpenditure"
+                  value={formData.expectedExpenditure}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required

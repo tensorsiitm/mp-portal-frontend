@@ -21,7 +21,7 @@ const Home = () => {
      
     <div className='flex flex-col justify-center items-center overflow-y-hidden'>
      <div className='absolute w-[75vw] overflow-hidden z-1'>
-        <img src={Pbg} />
+        <img src={Pbg} alt='PMNRF Background'/>
      </div>
      <div className='relative flex flex-col justify-center items-center '>
      <h1 className='text-6xl font-bold text-center'>Prime Minister's National Relief Fund </h1>
