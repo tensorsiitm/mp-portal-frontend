@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../../components/navbar/navbar';
 import Ell from '../../assets/images/ellipse.jpg';
 import { Tagtype, useCreateApplicationMutation } from '../../generated/graphql.tsx';
+import { formatAadhaar, formatPhone } from '../../utils/input.js';
 
 const defaultFormData = {
   name: '',
@@ -20,10 +21,22 @@ const Apply = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if(name === "aadhaar") {
+      setFormData(prevData => ({
+        ...prevData,
+        aadhaar: formatAadhaar(value)
+      }))
+    } else if(name === "phone") {
+      setFormData(prevData => ({
+        ...prevData,
+        phone: formatPhone(value)
+      }))
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
