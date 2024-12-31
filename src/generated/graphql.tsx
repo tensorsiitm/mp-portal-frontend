@@ -53,7 +53,9 @@ export type MutationCreateApplicationArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  applications: Array<Application>;
+  getApplications: Array<Application>;
+  getCMNRFApplications: Array<Application>;
+  getPMNRFApplications: Array<Application>;
   getUsers: Array<User>;
 };
 
@@ -74,6 +76,16 @@ export type CreateApplicationMutationVariables = Exact<{
 
 
 export type CreateApplicationMutation = { __typename?: 'Mutation', createApplication: { __typename?: 'Application', id: string } };
+
+export type GetPmnrfApplicationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPmnrfApplicationsQuery = { __typename?: 'Query', getPMNRFApplications: Array<{ __typename?: 'Application', aadhaar: string, address: string, expectedExpenditure: number, healthIssue: string, hospital: string, id: string, name: string, phone: string }> };
+
+export type GetCmnrfApplicationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCmnrfApplicationsQuery = { __typename?: 'Query', getCMNRFApplications: Array<{ __typename?: 'Application', aadhaar: string, address: string, expectedExpenditure: number, healthIssue: string, hospital: string, id: string, name: string, phone: string, tag: Tagtype }> };
 
 
 export const CreateApplicationDocument = gql`
@@ -109,3 +121,96 @@ export function useCreateApplicationMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateApplicationMutationHookResult = ReturnType<typeof useCreateApplicationMutation>;
 export type CreateApplicationMutationResult = Apollo.MutationResult<CreateApplicationMutation>;
 export type CreateApplicationMutationOptions = Apollo.BaseMutationOptions<CreateApplicationMutation, CreateApplicationMutationVariables>;
+export const GetPmnrfApplicationsDocument = gql`
+    query GetPMNRFApplications {
+  getPMNRFApplications {
+    aadhaar
+    address
+    expectedExpenditure
+    healthIssue
+    hospital
+    id
+    name
+    phone
+  }
+}
+    `;
+
+/**
+ * __useGetPmnrfApplicationsQuery__
+ *
+ * To run a query within a React component, call `useGetPmnrfApplicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPmnrfApplicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPmnrfApplicationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPmnrfApplicationsQuery(baseOptions?: Apollo.QueryHookOptions<GetPmnrfApplicationsQuery, GetPmnrfApplicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPmnrfApplicationsQuery, GetPmnrfApplicationsQueryVariables>(GetPmnrfApplicationsDocument, options);
+      }
+export function useGetPmnrfApplicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPmnrfApplicationsQuery, GetPmnrfApplicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPmnrfApplicationsQuery, GetPmnrfApplicationsQueryVariables>(GetPmnrfApplicationsDocument, options);
+        }
+export function useGetPmnrfApplicationsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPmnrfApplicationsQuery, GetPmnrfApplicationsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetPmnrfApplicationsQuery, GetPmnrfApplicationsQueryVariables>(GetPmnrfApplicationsDocument, options);
+        }
+export type GetPmnrfApplicationsQueryHookResult = ReturnType<typeof useGetPmnrfApplicationsQuery>;
+export type GetPmnrfApplicationsLazyQueryHookResult = ReturnType<typeof useGetPmnrfApplicationsLazyQuery>;
+export type GetPmnrfApplicationsSuspenseQueryHookResult = ReturnType<typeof useGetPmnrfApplicationsSuspenseQuery>;
+export type GetPmnrfApplicationsQueryResult = Apollo.QueryResult<GetPmnrfApplicationsQuery, GetPmnrfApplicationsQueryVariables>;
+export const GetCmnrfApplicationsDocument = gql`
+    query GetCMNRFApplications {
+  getCMNRFApplications {
+    aadhaar
+    address
+    expectedExpenditure
+    healthIssue
+    hospital
+    id
+    name
+    phone
+    tag
+  }
+}
+    `;
+
+/**
+ * __useGetCmnrfApplicationsQuery__
+ *
+ * To run a query within a React component, call `useGetCmnrfApplicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCmnrfApplicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCmnrfApplicationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCmnrfApplicationsQuery(baseOptions?: Apollo.QueryHookOptions<GetCmnrfApplicationsQuery, GetCmnrfApplicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCmnrfApplicationsQuery, GetCmnrfApplicationsQueryVariables>(GetCmnrfApplicationsDocument, options);
+      }
+export function useGetCmnrfApplicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCmnrfApplicationsQuery, GetCmnrfApplicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCmnrfApplicationsQuery, GetCmnrfApplicationsQueryVariables>(GetCmnrfApplicationsDocument, options);
+        }
+export function useGetCmnrfApplicationsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetCmnrfApplicationsQuery, GetCmnrfApplicationsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetCmnrfApplicationsQuery, GetCmnrfApplicationsQueryVariables>(GetCmnrfApplicationsDocument, options);
+        }
+export type GetCmnrfApplicationsQueryHookResult = ReturnType<typeof useGetCmnrfApplicationsQuery>;
+export type GetCmnrfApplicationsLazyQueryHookResult = ReturnType<typeof useGetCmnrfApplicationsLazyQuery>;
+export type GetCmnrfApplicationsSuspenseQueryHookResult = ReturnType<typeof useGetCmnrfApplicationsSuspenseQuery>;
+export type GetCmnrfApplicationsQueryResult = Apollo.QueryResult<GetCmnrfApplicationsQuery, GetCmnrfApplicationsQueryVariables>;

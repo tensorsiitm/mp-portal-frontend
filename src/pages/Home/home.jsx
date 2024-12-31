@@ -15,7 +15,11 @@ function Home() {
   const pmnrfClick = () => {
     navigate('/pmnrf');
   };
+  
 
+  const viewclick = () => {
+    navigate('/view');
+  };
   return (
     <>  
     <div className='absolute'>
@@ -54,9 +58,18 @@ function Home() {
               <img src={Cmnrf} className='w-full' alt="CMNRF" />
               <h1 className='text-3xl font-bold text-center'>CMNRF</h1>
             </div>
-
+{/* 
             <div className='w-[20vw] h-[25vw] rounded-3xl bg-[#e7e7e7] drop-shadow-xl flex flex-col justify-center items-center'>
               <IoAddCircle className='text-6xl text-[#8b8b8b]' />
+            </div> */}
+            
+          
+            <div
+              className='w-[20vw] h-[25vw] rounded-3xl bg-white drop-shadow-xl flex flex-col justify-center gap-[40px] cursor-pointer'
+              onClick={viewclick} 
+            >
+     
+              <h1 className='text-3xl font-bold text-center'>View <br/> Applications</h1>
             </div>
           </div>
 

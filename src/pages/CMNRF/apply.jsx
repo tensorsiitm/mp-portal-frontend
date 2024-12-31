@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/navbar/navbar';
 import Ell from '../../assets/images/ellipse.jpg';
+import { Tagtype, useCreateApplicationMutation } from '../../generated/graphql.tsx';
+
+const defaultFormData = {
+  name: '',
+  aadhaar: '',
+  phone: '',
+  address: '',
+  healthIssue: '',
+  hospital: '',
+  expectedExpenditure: '',
+  tag: Tagtype.Cmnrf
+}
 
 const Apply = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    aadhar: '',
-    phone: '',
-    address: '',
-    healthIssue: '',
-    hospital: '',
-    expenditure: '',
-    ward: '',
-    applicant: '',
-    relation: '',
-    subject: '',
-  });
+  const [formData, setFormData] = useState([]);
+  const [createApplicationMutation] = useCreateApplicationMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +26,24 @@ const Apply = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+
+    try {
+      await createApplicationMutation({
+        variables : {
+          data : {
+            ...formData,
+            expectedExpenditure : Number(formData.expectedExpenditure)
+          }
+        }
+      })
+      alert("Submitted");
+      setFormData(defaultFormData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -71,14 +87,14 @@ const Apply = () => {
                 />
               </div>
               <div className="mt-[3vh]">
-                <label htmlFor="aadhar" className="block text-lg font-medium text-gray-700">
+                <label htmlFor="aadhaar" className="block text-lg font-medium text-gray-700">
                   ADHAAR NUMBER:
                 </label>
                 <input
                   type="text"
                   id="aadhar"
-                  name="aadhar"
-                  value={formData.aadhar}
+                  name="aadhaar"
+                  value={formData.aadhaar}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[40px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required
@@ -150,8 +166,8 @@ const Apply = () => {
                 </label>
                 <input
                   id="expenditure"
-                  name="expenditure"
-                  value={formData.expenditure}
+                  name="expectedExpenditure"
+                  value={formData.epectedExpenditure}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required
