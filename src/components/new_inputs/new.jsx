@@ -24,17 +24,17 @@ function New({Cancel_click,Submit_Click}){
 
     return(
         <div>
-        <form onSubmit={handleSubmit}>
+        <form className="new-form" onSubmit={handleSubmit}>
             
             <label></label>
-            <select className="new_dropdown" name='Type' id='Type' onChange={(e) => handleChanges(e)}>
+            <select className="new-dropdown" name='Type' id='Type' onChange={(e) => handleChanges(e)}>
                 <option value='1'>Type 1</option>
                 <option value='2'>Type 2</option>
                 <option value='3'>Type 3</option>
             </select>
             
             <label></label>
-            <select className="new_dropdown" name='Required' id='Required' onChange={(e) => handleChanges(e)}>
+            <select className="new-dropdown" name='Required' id='Required' onChange={(e) => handleChanges(e)}>
                 <option value='1'>Required</option>
                 <option value='0'>Not Required</option>
             </select>

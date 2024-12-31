@@ -18,15 +18,18 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cmnrf" element={<Cmnrf />} />
-        <Route path="/cmnrfapply" element={<CMNRFApply />} />
-        <Route path="/pmnrfapply" element={<PMNRFApply />} />
-        <Route path="/view" element={<View/>} />
-        <Route path="/pmnrf" element={<Pmnrf />} />
-        <Route path="/new-form" element={<Add />} />
-        <Route path="/viewcmnrf" element={<ViewC />} />
-        <Route path="/viewpmnrf" element={<ViewP />} />
-
+        {sessionStorage.getItem('logged') &&
+        <>
+          <Route path="/cmnrf" element={<Cmnrf />} />
+          <Route path="/cmnrfapply" element={<CMNRFApply />} />
+          <Route path="/pmnrfapply" element={<PMNRFApply />} />
+          <Route path="/view" element={<View/>} />
+          <Route path="/pmnrf" element={<Pmnrf />} />
+          {/* <Route path="/new-form" element={<Add />} /> */}
+          <Route path="/viewcmnrf" element={<ViewC />} />
+          <Route path="/viewpmnrf" element={<ViewP />} />
+        </>
+        }
       </Routes>
     </Router>
   );

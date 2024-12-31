@@ -134,7 +134,7 @@ const Apply = () => {
                 />
               </div>
 
-              <div className="mt-[vh]">
+              <div className="mt-[2vh]">
                 <label htmlFor="healthIssue" className="block text-lg font-medium text-gray-700">
                   HEALTH ISSUE:
                 </label>
@@ -148,7 +148,7 @@ const Apply = () => {
                 />
               </div>
 
-              <div className="mt-[vh]">
+              <div className="mt-[2vh]">
                 <label htmlFor="hospital" className="block text-lg font-medium text-gray-700">
                   HOSPITAL:
                 </label>
@@ -162,7 +162,7 @@ const Apply = () => {
                 />
               </div>
 
-              <div className="mt-[vh]">
+              <div className="mt-[2vh]">
                 <label htmlFor="expenditure" className="block text-lg font-medium text-gray-700">
                   EXPECTED EXPENDITURE:
                 </label>

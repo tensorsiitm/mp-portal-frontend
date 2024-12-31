@@ -35,7 +35,7 @@ import { useGetPmnrfApplicationsQuery } from '../../generated/graphql.tsx';
 
 const Viewpmnrf = () => {
   const [PMNRFData, setPMNRFData] = useState([]);
-  const { data, loading, error } = useGetPmnrfApplicationsQuery();
+  const { data } = useGetPmnrfApplicationsQuery();
 
   useEffect(() => {
     if (data) {

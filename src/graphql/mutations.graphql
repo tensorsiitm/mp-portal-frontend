@@ -3,3 +3,7 @@ mutation CreateApplication($data: CreateApplicationInput!) {
     id
   }
 }
+
+mutation LoginUser($password: String!) {
+  loginUser(password: $password)
+}

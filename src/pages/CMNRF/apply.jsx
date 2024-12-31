@@ -15,7 +15,7 @@ const defaultFormData = {
 }
 
 const Apply = () => {
-  const [formData, setFormData] = useState([]);
+  const [formData, setFormData] = useState(defaultFormData);
   const [createApplicationMutation] = useCreateApplicationMutation();
 
   const handleChange = (e) => {
@@ -118,7 +118,7 @@ const Apply = () => {
 
             {/* Group 2: Scrolling Inputs */}
             <div>
-              <div className="mt-[vh]">
+              <div className="mt-[2vh]">
                 <label htmlFor="address" className="block text-lg font-medium text-gray-700">
                   ADDRESS:
                 </label>
@@ -132,7 +132,7 @@ const Apply = () => {
                 />
               </div>
 
-              <div className="mt-[vh]">
+              <div className="mt-[2vh]">
                 <label htmlFor="healthIssue" className="block text-lg font-medium text-gray-700">
                   HEALTH ISSUE:
                 </label>
@@ -146,7 +146,7 @@ const Apply = () => {
                 />
               </div>
 
-              <div className="mt-[vh]">
+              <div className="mt-[2vh]">
                 <label htmlFor="hospital" className="block text-lg font-medium text-gray-700">
                   HOSPITAL:
                 </label>
@@ -167,7 +167,7 @@ const Apply = () => {
                 <input
                   id="expenditure"
                   name="expectedExpenditure"
-                  value={formData.epectedExpenditure}
+                  value={formData.expectedExpenditure}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required

@@ -42,6 +42,8 @@ function Home() {
             <p className='text-2xl font-medium mt-[5px]'>Idukki, Member of Parliament</p>
           </div>
 
+          {sessionStorage.getItem('logged') ? 
+          
           <div className='flex flex-row justify-center items-center gap-[4vw]'>
             <div
               className='w-[20vw] h-[25vw] rounded-3xl bg-white drop-shadow-xl flex flex-col justify-center gap-[20px] cursor-pointer'
@@ -72,6 +74,9 @@ function Home() {
               <h1 className='text-3xl font-bold text-center'>View <br/> Applications</h1>
             </div>
           </div>
+          : 
+          <h1 className='text-4xl font-bold'>Login to continue</h1>
+        }
 
           <p className='text-center'>@ Developed by Tensors IIT Madras</p>
         </div>

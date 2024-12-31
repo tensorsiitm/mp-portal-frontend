@@ -1,20 +1,20 @@
 
 
-form{
+.new-form{
     background-color: #1cca57;
     border-radius: 10px;
     margin: auto;
     width:27%;
     align-items: center;
 }
-select{
+.new-form select{
     margin: 5px;
     background-color: white;
     color: black;
     align-items: center;
 }
 
-input{
+.new-form input{
     border-radius: 5px;
     border-color: white;
     margin: 5px;
@@ -39,7 +39,7 @@ input{
     margin:20px 35px 15px 0px;
 }
 
-.new_dropdown{
+.new-dropdown{
     margin-top: 20px;
     font-size: 1em;
     height: 40px;

@@ -33,7 +33,7 @@ import { useGetCmnrfApplicationsQuery } from '../../generated/graphql.tsx';
 
 const Viewcmnrf = () => {
   const [CMNRFData, setCMNRFData] = useState([]);
-  const { data, loading, error } = useGetCmnrfApplicationsQuery();
+  const { data } = useGetCmnrfApplicationsQuery();
 
   useEffect(() => {
     if (data) {
