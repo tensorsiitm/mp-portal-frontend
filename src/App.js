@@ -11,13 +11,14 @@ import PMNRFApply from './pages/PMNRF/apply'
 import View from './pages/View/view'
 import ViewP from './pages/View/viewpmnrf'
 import ViewC from './pages/View/viewcmnrf'
-
+import Login from './pages/Login/login'
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path='/' element={<Login/>}/>
+        {/* <Route path="/" element={<Home />} /> */}
         {sessionStorage.getItem('logged') &&
         <>
           <Route path="/cmnrf" element={<Cmnrf />} />
