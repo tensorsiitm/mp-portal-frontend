@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/navbar/navbar';
 import Ell from '../../assets/images/ellipse.jpg';
-import { Tagtype, useCreateApplicationMutation } from '../../generated/graphql.tsx';
+import { useCreateApplicationMutation } from '../../generated/graphql.tsx';
 import { formatAadhaar, formatPhone } from '../../utils/input.js';
 
 const defaultFormData = {

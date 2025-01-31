@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useGetApplicationsQuery, GetApplicationsQuery } from '../../generated/graphql.tsx';
+import { useGetApplicationsQuery  } from '../../generated/graphql.tsx';
 
 const ApplicationView = () => {
   const [applications, setApplications] = useState([]);
