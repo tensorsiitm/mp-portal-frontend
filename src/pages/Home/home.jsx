@@ -41,7 +41,7 @@ function Home() {
             <p className='text-2xl font-medium mt-[5px]'>Idukki, Member of Parliament</p>
           </div>
 
-          {sessionStorage.getItem('logged') ? 
+          {sessionStorage.getItem('office_code') ? 
           
           <div className='flex flex-row justify-center items-center gap-[4vw]'>
             <div

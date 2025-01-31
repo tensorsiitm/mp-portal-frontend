@@ -24,3 +24,9 @@ query GetCMNRFApplications {
     tag
   }
 }
+
+query GetMe {
+  getMe {
+    office
+  }
+}

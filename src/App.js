@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
@@ -12,14 +12,29 @@ import View from './pages/View/view'
 import ViewP from './pages/View/viewpmnrf'
 import ViewC from './pages/View/viewcmnrf'
 import Login from './pages/Login/login'
+import { useGetMeQuery } from './generated/graphql.tsx';
 
 function App() {
+  const office = sessionStorage.getItem('office_code')
+
+  const { data } = useGetMeQuery({
+    skip: !!office
+  })
+
+  useEffect(() => {
+    console.log('here', data, office)
+    if(data) {
+      sessionStorage.setItem('office_code', data.getMe.office)
+      window.location.reload();
+    }
+  }, [data]);
+
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Login/>}/>
-        {/* <Route path="/" element={<Home />} /> */}
-        {sessionStorage.getItem('logged') &&
+        <Route path="/" element={<Home />} />
+        <Route path='/login' element={<Login/>}/>
+        {office &&
         <>
           <Route path="/cmnrf" element={<Cmnrf />} />
           <Route path="/cmnrfapply" element={<CMNRFApply />} />
