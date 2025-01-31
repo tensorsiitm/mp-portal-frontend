@@ -1,32 +1,20 @@
-query GetPMNRFApplications {
-  getPMNRFApplications {
-    aadhaar
-    address
-    expectedExpenditure
-    healthIssue
-    hospital
-    id
-    name
-    phone
-  }
-}
-
-query GetCMNRFApplications {
-  getCMNRFApplications {
-    aadhaar
-    address
-    expectedExpenditure
-    healthIssue
-    hospital
-    id
-    name
-    phone
-    tag
-  }
-}
-
 query GetMe {
   getMe {
     office
+  }
+}
+
+query GetApplications {
+  getApplications {
+    appId
+    aadhaar
+    address
+    expectedExpenditure
+    healthIssue
+    hospital
+    id
+    name
+    phone
+    year
   }
 }
