@@ -34,7 +34,7 @@ const Login = () => {
         sessionStorage.setItem('office_code',res.data.createUser.office)
         navigate('/')
       } catch(err) {
-        console.log(err)
+        alert(err.message)
       }
     }
 
@@ -50,7 +50,7 @@ const Login = () => {
         sessionStorage.setItem('office_code', res.data.loginUser.office)
         navigate('/')
       } catch(err) {
-        console.log(err)
+        alert(err.message)
       }
     }
   return (

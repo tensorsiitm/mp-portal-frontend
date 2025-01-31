@@ -25,12 +25,11 @@ function App() {
   })
 
   useEffect(() => {
-    console.log('here', data, office)
     if(data) {
       sessionStorage.setItem('office_code', data.getMe.office)
       window.location.reload();
     }
-  }, [data]);
+  }, [data, office]);
 
   return (
     <Router>
