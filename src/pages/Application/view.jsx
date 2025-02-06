@@ -52,10 +52,10 @@ const ApplicationView = () => {
               <strong>Address:</strong> {item.address}
             </p>
             <p>
-              <strong>Health Issue:</strong> {item.healthIssue}
+              <strong>Issue:</strong> {item.healthIssue}
             </p>
             <p>
-              <strong>Hospital:</strong> {item.hospital}
+              <strong>Remarks:</strong> {item.hospital}
             </p>
             <p>
               <strong>Expected Expenditure:</strong> {item.expectedExpenditure}

@@ -147,7 +147,7 @@ const Apply = () => {
 
               <div className="mt-[2vh]">
                 <label htmlFor="healthIssue" className="block text-lg font-medium text-gray-700">
-                  HEALTH ISSUE:
+                  ISSUE:
                 </label>
                 <textarea
                   id="healthIssue"
@@ -161,7 +161,7 @@ const Apply = () => {
 
               <div className="mt-[2vh]">
                 <label htmlFor="hospital" className="block text-lg font-medium text-gray-700">
-                  HOSPITAL:
+                  REMARKS:
                 </label>
                 <input
                   id="hospital"
