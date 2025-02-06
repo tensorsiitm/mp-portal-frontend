@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  DateTimeISO: { input: any; output: any; }
 };
 
 export type Application = {
@@ -22,12 +23,17 @@ export type Application = {
   aadhaar: Scalars['String']['output'];
   address: Scalars['String']['output'];
   appId: Scalars['String']['output'];
+  body: Scalars['String']['output'];
+  date: Scalars['DateTimeISO']['output'];
   expectedExpenditure: Scalars['Float']['output'];
-  healthIssue: Scalars['String']['output'];
-  hospital: Scalars['String']['output'];
+  from: Scalars['String']['output'];
   id: Scalars['ID']['output'];
+  issue: Scalars['String']['output'];
   name: Scalars['String']['output'];
   phone: Scalars['String']['output'];
+  remarks: Scalars['String']['output'];
+  subject: Scalars['String']['output'];
+  to: Scalars['String']['output'];
   user: User;
   year: Scalars['Float']['output'];
 };
@@ -35,12 +41,15 @@ export type Application = {
 export type CreateApplicationInput = {
   aadhaar: Scalars['String']['input'];
   address: Scalars['String']['input'];
+  body: Scalars['String']['input'];
   expectedExpenditure: Scalars['Float']['input'];
+  from: Scalars['String']['input'];
   healthIssue: Scalars['String']['input'];
   hospital: Scalars['String']['input'];
   name: Scalars['String']['input'];
   phone: Scalars['String']['input'];
-  tag: Scalars['String']['input'];
+  subject: Scalars['String']['input'];
+  to: Scalars['String']['input'];
 };
 
 export type Mutation = {
@@ -118,7 +127,7 @@ export type GetMeQuery = { __typename?: 'Query', getMe: { __typename?: 'User', o
 export type GetApplicationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetApplicationsQuery = { __typename?: 'Query', getApplications: Array<{ __typename?: 'Application', appId: string, aadhaar: string, address: string, expectedExpenditure: number, healthIssue: string, hospital: string, id: string, name: string, phone: string, year: number }> };
+export type GetApplicationsQuery = { __typename?: 'Query', getApplications: Array<{ __typename?: 'Application', appId: string, aadhaar: string, address: string, expectedExpenditure: number, issue: string, remarks: string, id: string, name: string, phone: string, year: number, to: string, from: string, subject: string, body: string, date: any }> };
 
 
 export const CreateApplicationDocument = gql`
@@ -268,12 +277,17 @@ export const GetApplicationsDocument = gql`
     aadhaar
     address
     expectedExpenditure
-    healthIssue
-    hospital
+    issue
+    remarks
     id
     name
     phone
     year
+    to
+    from
+    subject
+    body
+    date
   }
 }
     `;

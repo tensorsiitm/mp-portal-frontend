@@ -10,11 +10,16 @@ query GetApplications {
     aadhaar
     address
     expectedExpenditure
-    healthIssue
-    hospital
+    issue
+    remarks
     id
     name
     phone
     year
+    to
+    from
+    subject
+    body
+    date
   }
 }

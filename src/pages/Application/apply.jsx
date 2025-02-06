@@ -9,9 +9,13 @@ const defaultFormData = {
   aadhaar: '',
   phone: '',
   address: '',
-  healthIssue: '',
-  hospital: '',
+  issue: '',
+  remarks: '',
   expectedExpenditure: '',
+  to: '',
+  from: '',
+  subject: '',
+  body: '',
 }
 
 const Apply = () => {
@@ -146,13 +150,13 @@ const Apply = () => {
               </div>
 
               <div className="mt-[2vh]">
-                <label htmlFor="healthIssue" className="block text-lg font-medium text-gray-700">
+                <label htmlFor="issue" className="block text-lg font-medium text-gray-700">
                   ISSUE:
                 </label>
                 <textarea
-                  id="healthIssue"
-                  name="healthIssue"
-                  value={formData.healthIssue}
+                  id="issue"
+                  name="issue"
+                  value={formData.issue}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[100px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required
@@ -160,18 +164,75 @@ const Apply = () => {
               </div>
 
               <div className="mt-[2vh]">
-                <label htmlFor="hospital" className="block text-lg font-medium text-gray-700">
+                <label htmlFor="remarks" className="block text-lg font-medium text-gray-700">
                   REMARKS:
                 </label>
                 <input
-                  id="hospital"
-                  name="hospital"
-                  value={formData.hospital}
+                  id="remarks"
+                  name="remarks"
+                  value={formData.remarks}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required
                 />
               </div>
+
+              <div className="mt-[2vh]">
+                <label htmlFor="to" className="block text-lg font-medium text-gray-700">
+                  TO:
+                </label>
+                <input
+                  id="to"
+                  name="to"
+                  value={formData.to}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
+                />
+              </div>
+
+              <div className="mt-[2vh]">
+                <label htmlFor="from" className="block text-lg font-medium text-gray-700">
+                  FROM:
+                </label>
+                <input
+                  id="from"
+                  name="from"
+                  value={formData.from}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
+                />
+              </div>
+
+              <div className="mt-[2vh]">
+                <label htmlFor="subject" className="block text-lg font-medium text-gray-700">
+                  SUBJECT:
+                </label>
+                <input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
+                />
+              </div>
+
+              <div className="mt-[2vh]">
+                <label htmlFor="body" className="block text-lg font-medium text-gray-700">
+                  BODY:
+                </label>
+                <textarea
+                  id="body"
+                  name="body"
+                  value={formData.body}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[#e9dfdf] h-[100px] rounded-md border-gray-300 shadow-xl px-[8px]"
+                  required
+                />
+              </div>
+
 
               <div className="mt-[vh]">
                 <label htmlFor="expenditure" className="block text-lg font-medium text-gray-700">
