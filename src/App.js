@@ -19,7 +19,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}/>
         {/* <Route path="/" element={<Home />} /> */}
-        {sessionStorage.getItem('logged') &&
+        {
+        sessionStorage.getItem('logged') &&
         <>
           <Route path="/cmnrf" element={<Cmnrf />} />
           <Route path="/cmnrfapply" element={<CMNRFApply />} />
