@@ -1,35 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import Home from './pages/Home/home';
-import Cmnrf from './pages/CMNRF/home';
-import Pmnrf from './pages/PMNRF/home';
-import CMNRFApply from './pages/CMNRF/apply'
-import PMNRFApply from './pages/PMNRF/apply'
+import Application from './pages/Application/home';
+import ApplicationApply from './pages/Application/apply';
+import ApplicationView from './pages/Application/view';
+// import CMNRF from './pages/CMNRF/home';
+// import PMNRF from './pages/PMNRF/home';
+// import CMNRFApply from './pages/CMNRF/apply'
+// import PMNRFApply from './pages/PMNRF/apply'
+// import View from './pages/View/view'
+// import ViewP from './pages/View/viewpmnrf'
+// import ViewC from './pages/View/viewcmnrf'
 // import Add from "./pages/add_form/add_form";
-import View from './pages/View/view'
-import ViewP from './pages/View/viewpmnrf'
-import ViewC from './pages/View/viewcmnrf'
 import Login from './pages/Login/login'
+import { useGetMeQuery } from './generated/graphql.tsx';
 
 function App() {
+  const office = sessionStorage.getItem('office_code')
+
+  const { data } = useGetMeQuery({
+    skip: !!office
+  })
+
+  useEffect(() => {
+    if(data) {
+      sessionStorage.setItem('office_code', data.getMe.office)
+      window.location.reload();
+    }
+  }, [data, office]);
+
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Login/>}/>
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
+        <Route path='/login' element={<Login/>}/>
         {
-        sessionStorage.getItem('logged') &&
+        office &&
         <>
-          <Route path="/cmnrf" element={<Cmnrf />} />
-          <Route path="/cmnrfapply" element={<CMNRFApply />} />
-          <Route path="/pmnrfapply" element={<PMNRFApply />} />
+          <Route path="/application" element={<Application />} />
+          <Route path="/application/apply" element={<ApplicationApply />} />
+          <Route path="/application/view" element={<ApplicationView />} />
+          {/* <Route path="/cmnrf" element={<CMNRF />} />
+          <Route path="/pmnrf" element={<PMNRF />} />
+          <Route path="/cmnrf/apply" element={<CMNRFApply />} />
+          <Route path="/pmnrf/apply" element={<PMNRFApply />} />
           <Route path="/view" element={<View/>} />
-          <Route path="/pmnrf" element={<Pmnrf />} />
+          <Route path="/view/cmnrf" element={<ViewC />} />
+          <Route path="/view/pmnrf" element={<ViewP />} /> */}
           {/* <Route path="/new-form" element={<Add />} /> */}
-          <Route path="/viewcmnrf" element={<ViewC />} />
-          <Route path="/viewpmnrf" element={<ViewP />} />
         </>
         }
       </Routes>

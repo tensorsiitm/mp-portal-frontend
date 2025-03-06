@@ -1,9 +1,17 @@
 mutation CreateApplication($data: CreateApplicationInput!) {
   createApplication(data: $data) {
-    id
+    appId
   }
 }
 
-mutation LoginUser($password: String!) {
-  loginUser(password: $password)
+mutation CreateUser($password: String!, $office: String!) {
+  createUser(password: $password, office: $office) {
+    office
+  }
+}
+
+mutation LoginUser($password: String!, $office: String!) {
+  loginUser(password: $password, office: $office) {
+    office
+  }
 }

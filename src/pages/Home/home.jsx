@@ -1,24 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Ell from '../../assets/images/ellipse.jpg';
-import Pmnrf from '../../assets/images/PMNRF.jpg';
+// import Pmnrf from '../../assets/images/PMNRF.jpg';
 import Cmnrf from '../../assets/images/CMNRF.jpg';
 import Navbar from '../../components/navbar/navbar';
 function Home() {
   const navigate = useNavigate(); 
 
-  const cmnrfClick = () => {
-    navigate('/cmnrf'); 
+  const applicationClick = () => {
+    navigate('/application'); 
   };
 
-  const pmnrfClick = () => {
-    navigate('/pmnrf');
-  };
+  // const pmnrfClick = () => {
+  //   navigate('/pmnrf');
+  // };
   
 
-  const viewclick = () => {
-    navigate('/view');
-  };
+  // const viewclick = () => {
+  //   navigate('/view');
+  // };
   return (
     <>  
     <div className='absolute'>
@@ -41,23 +41,23 @@ function Home() {
             <p className='text-2xl font-medium mt-[5px]'>Idukki, Member of Parliament</p>
           </div>
 
-          {sessionStorage.getItem('logged') ? 
+          {sessionStorage.getItem('office_code') ? 
           
           <div className='flex flex-row justify-center items-center gap-[4vw]'>
-            <div
+            {/* <div
               className='w-[20vw] h-[25vw] rounded-3xl bg-white drop-shadow-xl flex flex-col justify-center gap-[20px] cursor-pointer'
                  onClick={pmnrfClick}
             >
               <img src={Pmnrf} className='w-full' alt="PMNRF" />
               <h1 className='text-3xl font-bold text-center'>PMNRF</h1>
-            </div>
+            </div> */}
 
             <div
               className='w-[20vw] h-[25vw] rounded-3xl bg-white drop-shadow-xl flex flex-col justify-center gap-[40px] cursor-pointer'
-              onClick={cmnrfClick} 
+              onClick={applicationClick} 
             >
               <img src={Cmnrf} className='w-full' alt="CMNRF" />
-              <h1 className='text-3xl font-bold text-center'>CMNRF</h1>
+              <h1 className='text-3xl font-bold text-center'>Applications</h1>
             </div>
 {/* 
             <div className='w-[20vw] h-[25vw] rounded-3xl bg-[#e7e7e7] drop-shadow-xl flex flex-col justify-center items-center'>
@@ -65,13 +65,13 @@ function Home() {
             </div> */}
             
           
-            <div
+            {/* <div
               className='w-[20vw] h-[25vw] rounded-3xl bg-white drop-shadow-xl flex flex-col justify-center gap-[40px] cursor-pointer'
               onClick={viewclick} 
             >
      
               <h1 className='text-3xl font-bold text-center'>View <br/> Applications</h1>
-            </div>
+            </div> */}
           </div>
           : 
           <h1 className='text-4xl font-bold'>Login to continue</h1>
