@@ -32,6 +32,16 @@ const Apply = () => {
     }
   };
 
+  const onSuccess = (response) => {
+    console.log('Login Success:', response);
+    setAccessToken(response.credential);
+  };
+
+  const onFailure = (response) => {
+    console.log('Login Failed:', response);
+  };
+
+
   const [category, setCategory] = useState('');
   const [formType, setFormType] = useState('');
   const [formData, setFormData] = useState(defaultFormData);
@@ -77,13 +87,117 @@ const Apply = () => {
           className="mt-4 p-2 border-2 border-blue-600 rounded-xl"
         >
           <option value="">Select an option</option>
+          <option value="general">General</option>
           <option value="pmnrf">PMNRF</option>
           <option value="cmnrf">CMNRF</option>
           <option value="eq">EQ</option>
           {/* <option value="d4">D4</option> */}
         </select>
 
-        {category === 'pmnrf' && (
+        {category === 'general' && (
+          <div className="mt-4 w-[100vw] h- justify-center items-center ">
+            <h2 className="text-3xl text-[#1c5dca] font-bold text-center">General Form</h2>
+            <form className="w-[100vw] px-[15vw] flex flex-col gap-[3vh]" onSubmit={handleSubmit}>
+            {/* Group 1: Headline and First Inputs */}
+            <div className="top-0 bg-white z-1 py-4">
+              <div>
+                <label htmlFor="name" className="block text-lg font-medium text-gray-700">
+                  NAME:
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca] px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="aadhaar" className="block text-lg font-medium text-gray-700">
+                  ADHAAR NUMBER:
+                </label>
+                <input
+                  type="text"
+                  id="aadhar"
+                  name="aadhaar"
+                  value={formData.aadhaar}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="phone" className="block text-lg font-medium text-gray-700">
+                  PHONE NUMBER:
+                </label>
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="issue" className="block text-lg font-medium text-gray-700">
+                  ISSUE:
+                </label>
+                <textarea
+                  id="issue"
+                  name="issue"
+                  value={formData.issue}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+
+              <div className="mt-[3vh]">
+                <label htmlFor="remarks" className="block text-lg font-medium text-gray-700">
+                  REMARKS:
+                </label>
+                <input
+                  id="remarks"
+                  name="remarks"
+                  value={formData.remarks}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="expenditure" className="block text-lg font-medium text-gray-700">
+                  EXPECTED EXPENDITURE:
+                </label>
+                <input
+                  id="expenditure"
+                  name="expectedExpenditure"
+                  value={formData.expectedExpenditure}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+
+
+
+
+              </div>
+              <button
+              type="submit"
+              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600"
+            >
+              Submit
+            </button>
+            </form>
+          </div>
+        )}
+
+      {category === 'pmnrf' && (
           <div className="mt-4 w-[100vw] h- justify-center items-center ">
             <h2 className="text-3xl text-[#1c5dca] font-bold text-center">PMNRF</h2>
             <form className="w-[100vw] px-[15vw] flex flex-col gap-[3vh]" onSubmit={handleSubmit}>
@@ -117,6 +231,100 @@ const Apply = () => {
                   required
                 />
               </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="phone" className="block text-lg font-medium text-gray-700">
+                  PHONE NUMBER:
+                </label>
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="address" className="block text-lg font-medium text-gray-700">
+                  ADDRESS:
+                </label>
+                <textarea
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="issue" className="block text-lg font-medium text-gray-700">
+                  ISSUE:
+                </label>
+                <textarea
+                  id="issue"
+                  name="issue"
+                  value={formData.issue}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+
+              <div className="mt-[3vh]">
+                <label htmlFor="remarks" className="block text-lg font-medium text-gray-700">
+                  REMARKS:
+                </label>
+                <input
+                  id="remarks"
+                  name="remarks"
+                  value={formData.remarks}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[3vh]">
+                <label htmlFor="expenditure" className="block text-lg font-medium text-gray-700">
+                  EXPECTED EXPENDITURE:
+                </label>
+                <input
+                  id="expenditure"
+                  name="expectedExpenditure"
+                  value={formData.expectedExpenditure}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[2vh]">
+                <label htmlFor="to" className="block text-lg font-medium text-gray-700">
+                  TO:
+                </label>
+                <input
+                  id="to"
+                  name="to"
+                  value={formData.to}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+              <div className="mt-[2vh]">
+                <label htmlFor="subject" className="block text-lg font-medium text-gray-700">
+                  SUBJECT:
+                </label>
+                <input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca]  px-[8px]"
+                  required
+                />
+              </div>
+
 
 
 
@@ -166,7 +374,6 @@ const Apply = () => {
             </form>
           </div>
         )}
-
 
 
 
