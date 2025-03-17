@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from "react";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import Navbar from '../../components/navbar/navbar';
 import { useCreateApplicationMutation } from '../../generated/graphql.tsx';
 import { formatAadhaar, formatPhone } from '../../utils/input.js';
@@ -6,6 +8,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import fileUrlGenerator from '../../utils/fileUpload.js';
 
 const Apply = () => {
+  const pdfRef = useRef();
   const [fileName, setFileName] = useState("");
   const [file, setFile] = useState(null);
   const [category, setCategory] = useState('general');
@@ -37,6 +40,25 @@ const Apply = () => {
 
   const [createApplicationMutation] = useCreateApplicationMutation();
 
+
+  const generatePdf = () => {
+    const input = pdfRef.current;
+
+    html2canvas(input, { scale: 3 }).then((canvas) => {
+      const imgWidth = 210; // A4 width in mm
+      const imgHeight = 297; // A4 height in mm
+
+      // Convert canvas height to maintain aspect ratio
+      const pageHeight = (canvas.height * imgWidth) / canvas.width;
+
+      const pdf = new jsPDF("p", "mm", "a4");
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, imgWidth, pageHeight);
+
+      pdf.save("generated.pdf");
+    });
+  };
+
+
   const handleFileChange = (e) => {
     const file_ = e.target.files[0];
     if (file_) {
@@ -47,6 +69,7 @@ const Apply = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    generatePdf()
     try {
       let fileUrl = '';
       if(file) {
@@ -91,6 +114,7 @@ const Apply = () => {
           aadhaar: trainNumber, // Using aadhaar field for train number
           phone: dateOfJourney, // Using phone field for date of journey
           pnrNumber,
+          trainNumber,
           travelClass,
           boardingFrom,
           reservedUpTo,
@@ -141,7 +165,149 @@ const Apply = () => {
         <Navbar />
       </div>
 
-      <div className="flex flex-col items-center justify-center pt-[15vh]">
+      {/* Hidden Template for PDF */}
+      {/* <div ref={pdfRef} style={{ 
+        width: "600px", 
+        padding: "20px", 
+        background: "#fff", 
+        fontSize: "16px" 
+      }}>
+        <h2>User Details</h2>
+        <p>Name: {name}</p>
+        <p>Train Number: {trainNumber}</p>
+      </div> */}
+
+
+
+<div ref={pdfRef}  style={{
+          width: "794px", // A4 width in pixels
+          height: "1123px", // A4 height in pixel
+          background: "#fff",
+          fontSize: "16px",
+        }} className="w-[] absolute z-[-10]  mx-auto border py-[1%] px-[3%] border-gray-300  bg-white font-serif">
+
+
+  <div className="flex justify-between items-start mb-4 ">
+
+    <div className="flex flex-col">
+      <h1 className="text-green-800 font-bold text-xl">DEAN KURIAKOSE</h1>
+      <p className="text-sm">Member of Parliament</p>
+      <p className="text-sm">(Lok Sabha)</p>
+      <p className="text-sm">Idukki, Kerala</p>
+      
+      <div className="mt-2">
+        <p className="text-sm font-bold text-green-800">Member:</p>
+        <p className="text-sm text-green-800">Standing Committee on Labour</p>
+        <p className="text-sm text-green-800">Consultive Committee on Rural Development</p>
+      </div>
+    </div>
+
+    <div className="mx-4">
+      <img src="/sathyamlogo.png" alt="National Emblem" className="w-[20vh] mt-[5vh] h-[20vh]" />
+    </div>
+    
+   
+    <div className="text-right text-sm">
+      <p>90, South Avenue</p>
+      <p>New Delhi - 110 011</p>
+      <p>Mob : 9447877369</p>
+      <p>011-23011030</p>
+      <p>E-mail : deankuriakosemp@gmail.com</p>
+      <p>dean.kuriakose@sansad.nic.in</p>
+    </div>
+  </div>
+  
+
+  <div className="text-center border border-red-600 text-red-600 font-bold mb-4 w-36  py-[2vh]  mx-auto">
+    TOP URGENT
+  </div>
+  
+ 
+  <div className="text-right mb-4">
+    <p>19.01-2025</p>
+  </div>
+  
+
+  <div className="mb-4">
+    <p className="font-bold">The Sr. Divisional</p>
+    <p className="font-bold">Commercial Manager,</p>
+    <p className="font-bold">Southern Railway</p>
+  </div>
+
+  <div className="mb-4">
+    <p>Dear Commercial Manager,</p>
+  </div>
+  
+
+  <div className="mb-4 ">
+    <p className="text-justify">
+      The following passenger is making an emergency travel and his ticket is
+      waitlisted. Considering the exigent nature their journey, I would request you to
+      kindly be pleased to release an emergency quota for the same.
+    </p>
+  </div>
+
+
+  <div className="grid grid-cols-3 gap-2 mb-4">
+    <div className="col-span-2">1. Train No & Name</div>
+    <div className="col-span-1">: {trainNumber}</div>
+    
+    <div className="col-span-2">2. Date of journey</div>
+    <div className="col-span-1">: {dateOfJourney}</div>
+    
+    <div className="col-span-2">3. PNR No</div>
+    <div className="col-span-1">: {pnrNumber}</div>
+    
+    <div className="col-span-2">4. className</div>
+    <div className="col-span-1">: {travelClass}</div>
+    
+    <div className="col-span-2">5. Boarding from</div>
+    <div className="col-span-1">: {boardingFrom}</div>
+    
+    <div className="col-span-2">6. Reserved up to</div>
+    <div className="col-span-1">: {reservedUpTo}</div>
+    
+    <div className="col-span-2">7. Name of party along with official-<br/>status, wherever applicable</div>
+    <div className="col-span-1">:{name}+{numberOfSeats-1}</div>
+    
+    <div className="col-span-2">8. No. of Births/Seats required</div>
+    <div className="col-span-1">: {numberOfSeats}</div>
+    
+    <div className="col-span-2">9. Contact no</div>
+    <div className="col-span-1">: {contactNumber}</div>
+  </div>
+  
+
+  <div className="flex justify-between items-center mt-8">
+   
+    <div className="w-24 h-24">
+      <img src="/sathyamlogo.png" alt="Official Seal" className="w-full h-full rounded-full bg-green-100" />
+    </div>
+    
+ 
+    <div className="text-right">
+      <p>Thanks & Regards</p>
+      <div className="h-12 w-32 mt-2 mb-2 ml-auto">
+        <img src="/sign.png" alt="Signature" className="ml-auto" />
+      </div>
+      <p className="font-bold">Adv. Dean Kuriakose</p>
+    </div>
+  </div>
+  
+ 
+  <div className="mt-12 text-center text-xs text-green-800 border-t pt-4">
+    <p>MP Office: 1. Opp. PWD Guest House, Telephone Exchange Road, Thodupuzha PO</p>
+    <p>Idukki Distt., Kerala - 685584 | Phone: 0486-222266</p>
+    <p>MP Office: 2. Aalikunnel Building, Idukki Colony PO, Cheruthoni, Kerala-685602</p>
+    <p>Phone: 0486-222266</p>
+  </div>
+</div>
+
+
+
+
+
+      <div className="flex flex-col items-center justify-center bg-[#fff] pt-[15vh]">
         <h1 className='text-4xl font-bold text-[#2e3fd2] mb-[5vh]'>Application Details</h1>
         <h1 className="text-4xl font-light">Select Category</h1>
         <select
@@ -305,8 +471,17 @@ const Apply = () => {
                 type="submit"
                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600"
               >
-                Submit
+                Submit & Download as PDF
               </button>
+
+         
+
+              {/* <button
+              onClick={generatePdf}
+                className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600">
+                Download PDF
+              </button> */}
+
             </form>
           </div>
         )}
