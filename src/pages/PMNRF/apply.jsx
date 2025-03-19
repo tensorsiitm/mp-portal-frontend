@@ -12,7 +12,7 @@ const defaultFormData = {
   healthIssue: '',
   hospital: '',
   expectedExpenditure: '',
-  tag: Tagtype.Pmnrf
+  // tag: Tagtype.Pmnrf
 }
 
 
@@ -66,28 +66,26 @@ const Apply = () => {
 
   return (
     <div>
-      <div className="absolute z-10">
-        <Navbar />
-      </div>
-      <div className="flex flex-row h-[100vh] w-[100vw] overflow-hidden bg-[#ffffff]">
+      
+      <div className="flex flex-row h-[] w-[100vw] overflow-hidden bg-[#ffffff]">
         {/* Left Section */}
-        <div className="flex flex-col justify-center items-center">
+        {/* <div className="flex flex-col justify-center items-center">
           <img src={Ell} className="w-[20vw]" alt="Ellipse" />
           <div className="absolute text-white font-redHat font-medium text-center justify-center flex flex-col">
             <h1 className="text-6xl font-semibold text-center">PMNRF</h1>
           </div>
-        </div>
+        </div> */}
 
         {/* Right Section */}
-        <div className="flex flex-col items-center align-middle w-[80vw] gap-[5vh] z-1 pt-[17vh] overflow-y-auto">
+        <div className="flex flex-col items-center align-middle w-[100vw] gap-[5vh] z-1 pt-[3vh] overflow-y-auto">
           <div className="bg-white w-full text-center">
             <h1 className="text-4xl font-bold text-gray-800">
-              Application Details
+              PMNRF 
             </h1>
           </div>
 
           {/* Form */}
-          <form className="w-[80vw] px-[15vw] flex flex-col gap-[3vh]" onSubmit={handleSubmit}>
+          <form className="w-[90vw] px-[15vw] flex flex-col gap-[3vh]" onSubmit={handleSubmit}>
             {/* Group 1: Headline and First Inputs */}
             <div className="top-0 bg-white z-1 py-4">
               <div>

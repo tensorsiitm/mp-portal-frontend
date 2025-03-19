@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home/home';
 import Application from './pages/Application/home';
-import ApplicationApply from './pages/Application/apply';
+import Apply from './pages/Application/apply';
 import ApplicationView from './pages/Application/view';
 // import CMNRF from './pages/CMNRF/home';
 // import PMNRF from './pages/PMNRF/home';
@@ -34,14 +34,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Apply />} />
         <Route path='/login' element={<Login/>}/>
-        {
+        {/* {
         office &&
         <>
           <Route path="/application" element={<Application />} />
           <Route path="/application/apply" element={<ApplicationApply />} />
-          <Route path="/application/view" element={<ApplicationView />} />
+          <Route path="/application/view" element={<ApplicationView />} /> */}
           {/* <Route path="/cmnrf" element={<CMNRF />} />
           <Route path="/pmnrf" element={<PMNRF />} />
           <Route path="/cmnrf/apply" element={<CMNRFApply />} />
@@ -50,8 +50,8 @@ function App() {
           <Route path="/view/cmnrf" element={<ViewC />} />
           <Route path="/view/pmnrf" element={<ViewP />} /> */}
           {/* <Route path="/new-form" element={<Add />} /> */}
-        </>
-        }
+        {/* </>
+        } */}
       </Routes>
     </Router>
   );
