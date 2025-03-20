@@ -15,7 +15,7 @@ const ApplicationView = () => {
 
   const filteredData = applications.filter(
     (item) =>
-      item.appId.toLowerCase().includes(searchTerm.toLocaleLowerCase) ||
+      item.appId.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.aadhaar.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.phone.toLowerCase().includes(searchTerm.toLowerCase()) || 
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -33,7 +33,7 @@ const ApplicationView = () => {
       />
       <div className="flex flex-col gap-8">
         {filteredData.length > 0 ? filteredData.map((item, index) => {
-          const date = new Date(item.date)
+          const date = new Date(item.creationDate)
           return (
           <div
             key={index}
@@ -55,19 +55,10 @@ const ApplicationView = () => {
               <strong>Address:</strong> {item.address}
             </p>
             <p>
-              <strong>Issue:</strong> {item.healthIssue}
+              <strong>Issue:</strong> {item.issue}
             </p>
             <p>
-              <strong>Remarks:</strong> {item.hospital}
-            </p>
-            <p>
-              <strong>To:</strong> {item.to}
-            </p>
-            <p>
-              <strong>From:</strong> {item.from}
-            </p>
-            <p>
-              <strong>Subject:</strong> {item.subject}
+              <strong>Remarks:</strong> {item.remarks}
             </p>
             <p>
               <strong>Date:</strong> {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}

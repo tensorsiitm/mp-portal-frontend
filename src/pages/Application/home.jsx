@@ -19,7 +19,7 @@ const Home = () => {
     // };
   
     return (
-      <div className='w-[100vw] h-[100vh] pt-[10vh]'>
+      <div className='w-[100vw] h-min-screen pt-[25vh]'>
         <div className="font-judson overflow-hidden flex flex-col justify-center items-center">
           <div className='flex flex-col justify-center items-center overflow-y-hidden'>
             <div className='absolute w-[75vw] overflow-hidden z-1'>

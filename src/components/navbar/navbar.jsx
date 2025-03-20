@@ -13,7 +13,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='w-[100vw] h-[8vh] bg-[#1c5dca] flex justify-between items-center px-[5vw]'>
+    <div className='w-[100vw] fixed h-[8vh] bg-[#1c5dca] flex justify-between items-center px-[5vw]'>
       <div>
         <CgProfile className='text-4xl text-[#e7e7e7]'/>
       </div>

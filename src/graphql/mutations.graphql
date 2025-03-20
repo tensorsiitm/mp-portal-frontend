@@ -15,3 +15,9 @@ mutation LoginUser($password: String!, $office: String!) {
     office
   }
 }
+
+mutation CreateEQ($data: createEQInput!) {
+  createEQ(data: $data) {
+    id
+  }
+}
