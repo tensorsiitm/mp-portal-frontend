@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import Navbar from '../../components/navbar/navbar';
-import Ell from '../../assets/images/ellipse.jpg';
-import { Tagtype, useCreateApplicationMutation } from '../../generated/graphql.tsx';
+import { ApplicationType, useCreateApplicationMutation } from '../../generated/graphql.tsx';
 import { formatAadhaar, formatPhone } from '../../utils/input.js';
+import fileUrlGenerator from '../../utils/fileUpload.js';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const defaultFormData = {
   name: '',
   aadhaar: '',
   phone: '',
   address: '',
-  healthIssue: '',
-  hospital: '',
+  issue: '',
+  remarks: '',
   expectedExpenditure: '',
-  // tag: Tagtype.Pmnrf
+  type: ApplicationType.Pmnrf
 }
 
 
@@ -20,8 +20,25 @@ const defaultFormData = {
 
 const Apply = () => {
   const [formData, setFormData] = useState(defaultFormData);
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("");
 
-  const [createApplicationMutation ] = useCreateApplicationMutation();
+  const office = sessionStorage.getItem('office_code')
+
+  const [createApplicationMutation ] = useCreateApplicationMutation({
+    onCompleted(data) {
+      alert("Submitted with ID: "+ data.createApplication.appId);
+      
+    }
+  });
+
+  const handleFileChange = (e) => {
+    const file_ = e.target.files[0];
+    if (file_) {
+      setFile(file_);
+      setFileName(file_.name)
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,16 +65,20 @@ const Apply = () => {
     console.log('Form submitted:', formData);
 
     try {
+      let fileUrl = ''
+      if(file) {
+        fileUrl = await fileUrlGenerator(file, office)
+      }
       await createApplicationMutation({
         variables: {
           data: {
             ...formData,
-            expectedExpenditure: Number(formData.expectedExpenditure)
+            expectedExpenditure: Number(formData.expectedExpenditure),
+            fileUrl
           }
         }
       })
 
-      alert('Submitted')
       setFormData(defaultFormData)
     } catch(e) {
       console.log(e)
@@ -154,8 +175,8 @@ const Apply = () => {
                 </label>
                 <textarea
                   id="healthIssue"
-                  name="healthIssue"
-                  value={formData.healthIssue}
+                  name="issue"
+                  value={formData.issue}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[100px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required
@@ -168,8 +189,8 @@ const Apply = () => {
                 </label>
                 <input
                   id="hospital"
-                  name="hospital"
-                  value={formData.hospital}
+                  name="remarks"
+                  value={formData.remarks}
                   onChange={handleChange}
                   className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
                   required
@@ -189,6 +210,41 @@ const Apply = () => {
                   required
                 />
               </div>
+              <div className="max-w-lg mx-auto p- mt-10">
+              <label
+                htmlFor="file-upload"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-lg cursor-pointer flex justify-between items-center"
+              >
+                <span className="text-lg">Choose a File</span>
+                <input
+                  type="file"
+                  id="file-upload"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+                <div className="flex items-center space-x-2">
+                  <span
+                    className={`text-sm ${
+                      fileName ? "text-gray-700" : "text-gray-300"
+                    }`}
+                  >
+                    {fileName || "No file chosen"}
+                  </span>
+                  {fileName && (
+                    <button
+                      onClick={() => setFileName("")}
+                      className="text-red-500 hover:text-red-700 text-xs flex items-center space-x-1"
+                    >
+                      <FaTrashAlt size={14} /> {/* React icon for trash */}
+                      <span>Remove</span>
+                    </button>
+                  )}
+                </div>
+              </label>
+              <p className="text-sm mt-2 text-gray-600">
+                Supported formats: JPG, PNG, PDF, DOCX
+              </p>
+            </div>
             </div>
 
             <button

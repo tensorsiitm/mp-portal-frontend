@@ -16,10 +16,23 @@ query GetApplications {
     name
     phone
     year
-    to
-    from
-    subject
-    body
+    comments
+    type
+  }
+}
+
+query GetEQ {
+  getEQ {
+    id
+    name
+    area
+    train
     date
+    PNR
+    class
+    from
+    to
+    number
+    phone
   }
 }
