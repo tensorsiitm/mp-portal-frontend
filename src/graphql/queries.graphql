@@ -18,6 +18,7 @@ query GetApplications {
     year
     comments
     type
+    creationDate
   }
 }
 

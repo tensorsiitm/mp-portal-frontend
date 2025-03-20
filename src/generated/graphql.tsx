@@ -23,7 +23,7 @@ export type Application = {
   aadhaar: Scalars['String']['output'];
   address: Scalars['String']['output'];
   appId: Scalars['String']['output'];
-  comments: Array<Scalars['String']['output']>;
+  comments?: Maybe<Array<Scalars['String']['output']>>;
   creationDate: Scalars['DateTimeISO']['output'];
   expectedExpenditure: Scalars['Float']['output'];
   fileUrl: Scalars['String']['output'];
@@ -174,7 +174,7 @@ export type GetMeQuery = { __typename?: 'Query', getMe: { __typename?: 'User', o
 export type GetApplicationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetApplicationsQuery = { __typename?: 'Query', getApplications: Array<{ __typename?: 'Application', appId: string, aadhaar: string, address: string, expectedExpenditure: number, issue: string, remarks: string, id: string, name: string, phone: string, year: number, comments: Array<string>, type: ApplicationType }> };
+export type GetApplicationsQuery = { __typename?: 'Query', getApplications: Array<{ __typename?: 'Application', appId: string, aadhaar: string, address: string, expectedExpenditure: number, issue: string, remarks: string, id: string, name: string, phone: string, year: number, comments?: Array<string> | null, type: ApplicationType, creationDate: any }> };
 
 export type GetEqQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -370,6 +370,7 @@ export const GetApplicationsDocument = gql`
     year
     comments
     type
+    creationDate
   }
 }
     `;
