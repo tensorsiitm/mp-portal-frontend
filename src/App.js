@@ -23,6 +23,8 @@ function App() {
     }
   }, [data, office]);
 
+  console.log(process.env.REACT_APP_AWS_ACCESS)
+
   return (
     <Router>
       <Routes>
