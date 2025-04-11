@@ -14,7 +14,6 @@ const defaultFormData = {
   address: "",
   issue: "",
   remarks: "",
-  expectedExpenditure: "",
   type: ApplicationType.General,
 };
 
@@ -66,7 +65,6 @@ const General = () => {
         variables: {
           data: {
             ...formData,
-            expectedExpenditure: Number(formData.expectedExpenditure),
             fileUrl
           },
         },
@@ -171,22 +169,6 @@ const General = () => {
                 value={formData.remarks}
                 onChange={handleChange}
                 className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca] px-[8px]"
-                required
-              />
-            </div>
-            <div className="mt-[3vh]">
-              <label
-                htmlFor="expenditure"
-                className="block text-lg font-medium text-gray-700"
-              >
-                EXPECTED EXPENDITURE:
-              </label>
-              <input
-                id="expenditure"
-                name="expectedExpenditure"
-                value={formData.expectedExpenditure}
-                onChange={handleChange}
-                className="mt-1 block w-full bg-[#e9dfdf] h-[50px] rounded-md border-gray-300 shadow-xl px-[8px]"
                 required
               />
             </div>
