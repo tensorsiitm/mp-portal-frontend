@@ -1,26 +1,17 @@
 import React, { useRef, useState } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-
-import { useCreateApplicationMutation } from "../../generated/graphql.tsx";
+import { useCreateEqMutation } from "../../generated/graphql.tsx";
 
 
 
 const Eq = () => {
-  const [createApplicationMutation] = useCreateApplicationMutation();
+  const [createEQMutation] = useCreateEqMutation();
 
   const pdfRef = useRef();
 
-  const [category, setCategory] = useState("general");
   const [area, setArea] = useState("");
   const [name, setName] = useState("");
-
-  const [to, setTo] = useState("");
-  const [from, setFrom] = useState("");
-  const [subject, setSubject] = useState("");
-  //   const [body, setBody] = useState('');
-
-  // EQ specific states
   const [trainNumber, setTrainNumber] = useState("");
   const [dateOfJourney, setDateOfJourney] = useState("");
   const [pnrNumber, setPnrNumber] = useState("");
@@ -35,7 +26,6 @@ const Eq = () => {
 
     html2canvas(input, { scale: 3 }).then((canvas) => {
       const imgWidth = 210; // A4 width in mm
-      const imgHeight = 297; // A4 height in mm
 
       // Convert canvas height to maintain aspect ratio
       const pageHeight = (canvas.height * imgWidth) / canvas.width;
@@ -50,7 +40,7 @@ const Eq = () => {
         pageHeight
       );
 
-      pdf.save("generated.pdf");
+      pdf.save("EQ.pdf");
     });
   };
 
@@ -58,43 +48,29 @@ const Eq = () => {
     e.preventDefault();
     generatePdf();
     try {
-      //   let fileUrl = '';
-      //   if(file) {
-      //     fileUrl = fileUrlGenerator(file,fileName);
-      //   }
+      console.log("HERE")
 
-      // Collect form data based on category
-      let formData = {};
-
-      if (category === "eq") {
-        formData = {
+      const res = await createEQMutation({
+        variables: { data: {
           name,
-          aadhaar: trainNumber,
-          phone: dateOfJourney, // Using phone field for date of journey
-          pnrNumber,
-          trainNumber,
-          travelClass,
-          boardingFrom,
-          reservedUpTo,
-          numberOfSeats,
-          contactNumber,
-          // fileUrl
-        };
-      }
-
-      const res = await createApplicationMutation({
-        variables: { data: formData },
+          phone: contactNumber, // Using phone field for date of journey
+          from: boardingFrom,
+          to: reservedUpTo,
+          number: Number(numberOfSeats),
+          area,
+          class: travelClass,
+          date: `${dateOfJourney}T00:00:00Z`,
+          PNR: pnrNumber,
+          train: trainNumber
+        } },
       });
 
-      alert(`Submitted with ID: ${res.data.createApplication.appId}`);
+      console.log("DONE")
 
-      // Reset form fields
+      alert(`Submitted with ID: ${res.data.createEQ.id}`);
+
+
       setName("");
-
-      setTo("");
-      setFrom("");
-      setSubject("");
-
       setTrainNumber("");
       setDateOfJourney("");
       setPnrNumber("");
@@ -103,8 +79,6 @@ const Eq = () => {
       setReservedUpTo("");
       setNumberOfSeats("");
       setContactNumber("");
-      //   setFile(null);
-      //   setFileName('');
       setArea("");
     } catch (error) {
       console.log(error);

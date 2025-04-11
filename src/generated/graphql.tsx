@@ -23,38 +23,65 @@ export type Application = {
   aadhaar: Scalars['String']['output'];
   address: Scalars['String']['output'];
   appId: Scalars['String']['output'];
-  body: Scalars['String']['output'];
-  date: Scalars['DateTimeISO']['output'];
+  comments?: Maybe<Array<Scalars['String']['output']>>;
+  creationDate: Scalars['DateTimeISO']['output'];
   expectedExpenditure: Scalars['Float']['output'];
-  from: Scalars['String']['output'];
+  fileUrl: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   issue: Scalars['String']['output'];
   name: Scalars['String']['output'];
   phone: Scalars['String']['output'];
   remarks: Scalars['String']['output'];
-  subject: Scalars['String']['output'];
-  to: Scalars['String']['output'];
+  type: ApplicationType;
   user: User;
   year: Scalars['Float']['output'];
 };
 
+/** Type of Application */
+export enum ApplicationType {
+  Cmdrf = 'CMDRF',
+  General = 'GENERAL',
+  Pmnrf = 'PMNRF'
+}
+
 export type CreateApplicationInput = {
   aadhaar: Scalars['String']['input'];
-  address: Scalars['String']['input'];
-  body: Scalars['String']['input'];
+  address?: InputMaybe<Scalars['String']['input']>;
   expectedExpenditure: Scalars['Float']['input'];
-  from: Scalars['String']['input'];
-  healthIssue: Scalars['String']['input'];
-  hospital: Scalars['String']['input'];
+  fileUrl: Scalars['String']['input'];
+  issue: Scalars['String']['input'];
   name: Scalars['String']['input'];
   phone: Scalars['String']['input'];
-  subject: Scalars['String']['input'];
-  to: Scalars['String']['input'];
+  remarks: Scalars['String']['input'];
+  type: ApplicationType;
+};
+
+export type CreateCommentInput = {
+  appId: Scalars['String']['input'];
+  comment: Scalars['String']['input'];
+};
+
+export type Eq = {
+  __typename?: 'EQ';
+  PNR: Scalars['String']['output'];
+  area: Scalars['String']['output'];
+  class: Scalars['String']['output'];
+  date: Scalars['DateTimeISO']['output'];
+  from: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  number: Scalars['Float']['output'];
+  phone: Scalars['String']['output'];
+  to: Scalars['String']['output'];
+  train: Scalars['String']['output'];
+  user: User;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createApplication: Application;
+  createComment: Scalars['Boolean']['output'];
+  createEQ: Eq;
   createUser: User;
   deleteUser: Scalars['Boolean']['output'];
   loginUser: User;
@@ -63,6 +90,16 @@ export type Mutation = {
 
 export type MutationCreateApplicationArgs = {
   data: CreateApplicationInput;
+};
+
+
+export type MutationCreateCommentArgs = {
+  data: CreateCommentInput;
+};
+
+
+export type MutationCreateEqArgs = {
+  data: CreateEqInput;
 };
 
 
@@ -85,6 +122,7 @@ export type MutationLoginUserArgs = {
 export type Query = {
   __typename?: 'Query';
   getApplications: Array<Application>;
+  getEQ: Array<Eq>;
   getMe: User;
   getUsers: Array<User>;
 };
@@ -94,6 +132,19 @@ export type User = {
   applications: Array<Application>;
   id: Scalars['ID']['output'];
   office: Scalars['String']['output'];
+};
+
+export type CreateEqInput = {
+  PNR: Scalars['String']['input'];
+  area: Scalars['String']['input'];
+  class: Scalars['String']['input'];
+  date: Scalars['DateTimeISO']['input'];
+  from: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  number: Scalars['Float']['input'];
+  phone: Scalars['String']['input'];
+  to: Scalars['String']['input'];
+  train: Scalars['String']['input'];
 };
 
 export type CreateApplicationMutationVariables = Exact<{
@@ -119,6 +170,20 @@ export type LoginUserMutationVariables = Exact<{
 
 export type LoginUserMutation = { __typename?: 'Mutation', loginUser: { __typename?: 'User', office: string } };
 
+export type CreateEqMutationVariables = Exact<{
+  data: CreateEqInput;
+}>;
+
+
+export type CreateEqMutation = { __typename?: 'Mutation', createEQ: { __typename?: 'EQ', id: string } };
+
+export type CreateCommentMutationVariables = Exact<{
+  data: CreateCommentInput;
+}>;
+
+
+export type CreateCommentMutation = { __typename?: 'Mutation', createComment: boolean };
+
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -127,7 +192,12 @@ export type GetMeQuery = { __typename?: 'Query', getMe: { __typename?: 'User', o
 export type GetApplicationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetApplicationsQuery = { __typename?: 'Query', getApplications: Array<{ __typename?: 'Application', appId: string, aadhaar: string, address: string, expectedExpenditure: number, issue: string, remarks: string, id: string, name: string, phone: string, year: number, to: string, from: string, subject: string, body: string, date: any }> };
+export type GetApplicationsQuery = { __typename?: 'Query', getApplications: Array<{ __typename?: 'Application', appId: string, aadhaar: string, address: string, expectedExpenditure: number, issue: string, remarks: string, id: string, name: string, phone: string, year: number, comments?: Array<string> | null, type: ApplicationType, creationDate: any }> };
+
+export type GetEqQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetEqQuery = { __typename?: 'Query', getEQ: Array<{ __typename?: 'EQ', id: string, name: string, area: string, train: string, date: any, PNR: string, class: string, from: string, to: string, number: number, phone: string }> };
 
 
 export const CreateApplicationDocument = gql`
@@ -231,6 +301,70 @@ export function useLoginUserMutation(baseOptions?: Apollo.MutationHookOptions<Lo
 export type LoginUserMutationHookResult = ReturnType<typeof useLoginUserMutation>;
 export type LoginUserMutationResult = Apollo.MutationResult<LoginUserMutation>;
 export type LoginUserMutationOptions = Apollo.BaseMutationOptions<LoginUserMutation, LoginUserMutationVariables>;
+export const CreateEqDocument = gql`
+    mutation CreateEQ($data: createEQInput!) {
+  createEQ(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateEqMutationFn = Apollo.MutationFunction<CreateEqMutation, CreateEqMutationVariables>;
+
+/**
+ * __useCreateEqMutation__
+ *
+ * To run a mutation, you first call `useCreateEqMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateEqMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createEqMutation, { data, loading, error }] = useCreateEqMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateEqMutation(baseOptions?: Apollo.MutationHookOptions<CreateEqMutation, CreateEqMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateEqMutation, CreateEqMutationVariables>(CreateEqDocument, options);
+      }
+export type CreateEqMutationHookResult = ReturnType<typeof useCreateEqMutation>;
+export type CreateEqMutationResult = Apollo.MutationResult<CreateEqMutation>;
+export type CreateEqMutationOptions = Apollo.BaseMutationOptions<CreateEqMutation, CreateEqMutationVariables>;
+export const CreateCommentDocument = gql`
+    mutation CreateComment($data: CreateCommentInput!) {
+  createComment(data: $data)
+}
+    `;
+export type CreateCommentMutationFn = Apollo.MutationFunction<CreateCommentMutation, CreateCommentMutationVariables>;
+
+/**
+ * __useCreateCommentMutation__
+ *
+ * To run a mutation, you first call `useCreateCommentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCommentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCommentMutation, { data, loading, error }] = useCreateCommentMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateCommentMutation(baseOptions?: Apollo.MutationHookOptions<CreateCommentMutation, CreateCommentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCommentMutation, CreateCommentMutationVariables>(CreateCommentDocument, options);
+      }
+export type CreateCommentMutationHookResult = ReturnType<typeof useCreateCommentMutation>;
+export type CreateCommentMutationResult = Apollo.MutationResult<CreateCommentMutation>;
+export type CreateCommentMutationOptions = Apollo.BaseMutationOptions<CreateCommentMutation, CreateCommentMutationVariables>;
 export const GetMeDocument = gql`
     query GetMe {
   getMe {
@@ -283,11 +417,9 @@ export const GetApplicationsDocument = gql`
     name
     phone
     year
-    to
-    from
-    subject
-    body
-    date
+    comments
+    type
+    creationDate
   }
 }
     `;
@@ -323,3 +455,52 @@ export type GetApplicationsQueryHookResult = ReturnType<typeof useGetApplication
 export type GetApplicationsLazyQueryHookResult = ReturnType<typeof useGetApplicationsLazyQuery>;
 export type GetApplicationsSuspenseQueryHookResult = ReturnType<typeof useGetApplicationsSuspenseQuery>;
 export type GetApplicationsQueryResult = Apollo.QueryResult<GetApplicationsQuery, GetApplicationsQueryVariables>;
+export const GetEqDocument = gql`
+    query GetEQ {
+  getEQ {
+    id
+    name
+    area
+    train
+    date
+    PNR
+    class
+    from
+    to
+    number
+    phone
+  }
+}
+    `;
+
+/**
+ * __useGetEqQuery__
+ *
+ * To run a query within a React component, call `useGetEqQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEqQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEqQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetEqQuery(baseOptions?: Apollo.QueryHookOptions<GetEqQuery, GetEqQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEqQuery, GetEqQueryVariables>(GetEqDocument, options);
+      }
+export function useGetEqLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEqQuery, GetEqQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEqQuery, GetEqQueryVariables>(GetEqDocument, options);
+        }
+export function useGetEqSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetEqQuery, GetEqQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetEqQuery, GetEqQueryVariables>(GetEqDocument, options);
+        }
+export type GetEqQueryHookResult = ReturnType<typeof useGetEqQuery>;
+export type GetEqLazyQueryHookResult = ReturnType<typeof useGetEqLazyQuery>;
+export type GetEqSuspenseQueryHookResult = ReturnType<typeof useGetEqSuspenseQuery>;
+export type GetEqQueryResult = Apollo.QueryResult<GetEqQuery, GetEqQueryVariables>;
