@@ -122,8 +122,10 @@ const Eq = () => {
           height: "1123px", // A4 height in pixel
           background: "#fff",
           fontSize: "16px",
+            fontFamily: 'Lora'
+         
         }}
-        className="w-[] absolute z-[-100]  mx-auto border py-[1%] px-[3%] border-gray-300  bg-white font-serif"
+        className="w-[] absolute z-[-100]  mx-auto border py-[1%] px-[3%] border-gray-300  bg-white"
       >
         <div className="flex justify-between items-start mb-4 ">
           <div className="flex flex-col">
