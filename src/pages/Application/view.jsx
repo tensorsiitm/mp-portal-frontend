@@ -8,7 +8,7 @@ const ApplicationView = () => {
   const [showCommentBoxes, setShowCommentBoxes] = useState({});
   const { data } = useGetApplicationsQuery();
 
-  const [createCommentMutation, { data: commentData }] = useCreateCommentMutation();
+  const [createCommentMutation] = useCreateCommentMutation();
 
   useEffect(() => {
     if (data) {
