@@ -40,7 +40,7 @@ export type Application = {
 /** Type of Application */
 export enum ApplicationType {
   Cmdrf = 'CMDRF',
-  General = 'GENERAL',
+  Gnrl = 'GNRL',
   Pmnrf = 'PMNRF'
 }
 

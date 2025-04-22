@@ -14,7 +14,7 @@ const defaultFormData = {
   address: "",
   issue: "",
   remarks: "",
-  type: ApplicationType.General,
+  type: ApplicationType.Gnrl,
 };
 
 const General = () => {
