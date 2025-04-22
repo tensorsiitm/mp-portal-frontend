@@ -4,11 +4,6 @@ mutation CreateApplication($data: CreateApplicationInput!) {
   }
 }
 
-mutation CreateUser($password: String!, $office: String!) {
-  createUser(password: $password, office: $office) {
-    office
-  }
-}
 
 mutation LoginUser($password: String!, $office: String!) {
   loginUser(password: $password, office: $office) {
