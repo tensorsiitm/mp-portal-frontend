@@ -3,7 +3,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useCreateEqMutation } from "../../generated/graphql.tsx";
 
-
+import Eqimage from '../../assets/images/eqmpportal.png'
 
 const Eq = () => {
   const [createEQMutation] = useCreateEqMutation();
@@ -20,6 +20,9 @@ const Eq = () => {
   const [reservedUpTo, setReservedUpTo] = useState("");
   const [numberOfSeats, setNumberOfSeats] = useState("");
   const [contactNumber, setContactNumber] = useState("");
+  const [trainName, setTrainName] = useState("");
+
+
 
   const generatePdf = () => {
     const input = pdfRef.current;
@@ -61,7 +64,8 @@ const Eq = () => {
           class: travelClass,
           date: `${dateOfJourney}T00:00:00Z`,
           PNR: pnrNumber,
-          train: trainNumber
+          train: trainNumber,
+          trainName:trainName
         } },
       });
 
@@ -80,6 +84,7 @@ const Eq = () => {
       setNumberOfSeats("");
       setContactNumber("");
       setArea("");
+      setTrainName("");
     } catch (error) {
       console.log(error);
     }
@@ -88,152 +93,80 @@ const Eq = () => {
   return (
     <div>
       {/* TEMPLATE */}
-
       <div
-        ref={pdfRef}
-        style={{
-          width: "794px", // A4 width in pixels
-          height: "1123px", // A4 height in pixel
-          background: "#fff",
-          fontSize: "16px",
-            fontFamily: 'Lora'
-         
-        }}
-        className="w-[] absolute z-[-100]  mx-auto border py-[1%] px-[3%] border-gray-300  bg-white"
-      >
-        <div className="flex justify-between items-start mb-4 ">
-          <div className="flex flex-col">
-            <h1 className="text-green-800 font-bold text-xl">DEAN KURIAKOSE</h1>
-            <p className="text-sm">Member of Parliament</p>
-            <p className="text-sm">(Lok Sabha)</p>
-            <p className="text-sm">Idukki, Kerala</p>
+  ref={pdfRef}
+  style={{
+    width: "794px", // A4 width
+    height: "1123px", // A4 height
+    backgroundImage: `url(${Eqimage})`,
+    backgroundSize: "cover",       // Makes it fill the entire container
+    backgroundPosition: "center",  // Centers the image
+    backgroundRepeat: "no-repeat", // Prevents tiling
+    fontSize: "16px",
+    fontFamily: "Lora",
+  }}
+  className="absolute z-[-100] flex justify-center items-center  bg-white border border-gray-200"
+>
 
-            <div className="mt-2">
-              <p className="text-sm font-bold text-green-800">Member:</p>
-              <p className="text-sm text-green-800">
-                Standing Committee on Labour
-              </p>
-              <p className="text-sm text-green-800">
-                Consultive Committee on Rural Development
-              </p>
-            </div>
-          </div>
+<p className="absolute mb-[480px]  text-sm mr-[570px]">
+794 /EQ/TDPA/2025
+</p>
 
-          <div className="mx-4">
-            <img
-              src="/sathyamlogo.png"
-              alt="National Emblem"
-              className="w-[20vh] mt-[5vh] h-[20vh]"
-            />
-          </div>
+<p className="absolute mb-[380px]  text-left font-bold text-sm mr-[570px]">
+{area}
+</p>
 
-          <div className="text-right text-sm">
-            <p>90, South Avenue</p>
-            <p>New Delhi - 110 011</p>
-            <p>Mob : 9447877369</p>
-            <p>011-23011030</p>
-            <p>E-mail : deankuriakosemp@gmail.com</p>
-            <p>dean.kuriakose@sansad.nic.in</p>
-          </div>
-        </div>
 
-        <div className="text-center border border-red-600 text-red-600 font-bold mb-4 w-36  py-[2vh]  mx-auto">
-          TOP URGENT
-        </div>
 
-        <div className="text-right mb-4">
-          <p>19.01-2025</p>
-        </div>
+<p className="absolute mb-[505px]  text-sm ml-[550px]">
+{dateOfJourney} 
+</p>
+<div className="border border-black w-[440px] text-[13px] mt-[135px]">
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Train No & Name</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{trainNumber} - {trainName}</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Date of journey</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{dateOfJourney} April 11, 2024</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">PNR No</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{pnrNumber}</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Class</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{travelClass}</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Boarding from</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{boardingFrom}</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Reserved up to</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{reservedUpTo}</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Name of the passenger</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{name}</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Number of seats</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{numberOfSeats}</div>
+  </div>
+  <div className="flex">
+    <div className="w-[176px] bg-gray-300 border border-black pb-[6px] px-[2px]">Contact no of the passenger</div>
+    <div className="flex-1 border border-black pb-[6px] px-[2px]">{contactNumber}</div>
+  </div>
+</div>
 
-        <div className="mb-4">
-          <p className="font-bold">The Sr. Divisional</p>
-          <p className="font-bold">Commercial Manager,</p>
-          <p className="font-bold">Southern Railway</p>
-        </div>
 
-        <div className="mb-4">
-          <p>Dear Commercial Manager,</p>
-        </div>
-
-        <div className="mb-4 ">
-          <p className="text-justify">
-            The following passenger is making an emergency travel and his ticket
-            is waitlisted. Considering the exigent nature their journey, I would
-            request you to kindly be pleased to release an emergency quota for
-            the same.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="col-span-2">1. Train No & Name</div>
-          <div className="col-span-1">: {trainNumber}</div>
-
-          <div className="col-span-2">2. Date of journey</div>
-          <div className="col-span-1">: {dateOfJourney}</div>
-
-          <div className="col-span-2">3. PNR No</div>
-          <div className="col-span-1">: {pnrNumber}</div>
-
-          <div className="col-span-2">4. className</div>
-          <div className="col-span-1">: {travelClass}</div>
-
-          <div className="col-span-2">5. Boarding from</div>
-          <div className="col-span-1">: {boardingFrom}</div>
-
-          <div className="col-span-2">6. Reserved up to</div>
-          <div className="col-span-1">: {reservedUpTo}</div>
-
-          <div className="col-span-2">
-            7. Name of party along with official-
-            <br />
-            status, wherever applicable
-          </div>
-          <div className="col-span-1">
-            :{name}+{numberOfSeats - 1}
-          </div>
-
-          <div className="col-span-2">8. No. of Births/Seats required</div>
-          <div className="col-span-1">: {numberOfSeats}</div>
-
-          <div className="col-span-2">9. Contact no</div>
-          <div className="col-span-1">: {contactNumber}</div>
-        </div>
-
-        <div className="flex justify-between items-center mt-8">
-          <div className="w-24 h-24">
-            <img
-              src="/sathyamlogo.png"
-              alt="Official Seal"
-              className="w-full h-full rounded-full bg-green-100"
-            />
-          </div>
-
-          <div className="text-right">
-            <p>Thanks & Regards</p>
-            <div className="h-12 w-32 mt-2 mb-2 ml-auto">
-              <img src="/sign.png" alt="Signature" className="ml-auto" />
-            </div>
-            <p className="font-bold">Adv. Dean Kuriakose</p>
-          </div>
-        </div>
-
-        <div className="mt-12 text-center text-xs text-green-800 border-t pt-4">
-          <p>
-            MP Office: 1. Opp. PWD Guest House, Telephone Exchange Road,
-            Thodupuzha PO
-          </p>
-          <p>Idukki Distt., Kerala - 685584 | Phone: 0486-222266</p>
-          <p>
-            MP Office: 2. Aalikunnel Building, Idukki Colony PO, Cheruthoni,
-            Kerala-685602
-          </p>
-          <p>Phone: 0486-222266</p>
-        </div>
+       
       </div>
 
       {/* MAIN SECTION */}
 
-      <div className="mt-4 w-[100vw] h-[] py-[5vh] justify-center items-center bg-white">
+      <div className="mt-4 w-[100vw]   h-[] py-[5vh] justify-center items-center bg-white">
         <h2 className="text-3xl text-[#1c5dca] font-bold text-center">EQ</h2>
         <form
           className="w-[100vw] px-[15vw] flex flex-col gap-[3vh]"
@@ -289,6 +222,26 @@ const Eq = () => {
                 required
               />
             </div>
+
+            <div>
+              <label
+                htmlFor="trainName"
+                className="block text-lg font-medium text-gray-700"
+              >
+                TRAIN NAME:
+              </label>
+              <input
+                type="text"
+                id="train-name"
+                value={trainName}
+                onChange={(e) => setTrainName(e.target.value)}
+                className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca] px-[8px]"
+                required
+              />
+            </div>
+
+
+
             <div className="mt-[3vh]">
               <label
                 htmlFor="dateOfJourney"
