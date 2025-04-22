@@ -1,6 +1,6 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
-const fileUrlGenerator = async (file, userName) => {
+const fileUrlGenerator = async (file, fileKey) => {
   
   try {
     const s3Client = new S3Client({
@@ -11,9 +11,6 @@ const fileUrlGenerator = async (file, userName) => {
         secretAccessKey: process.env.REACT_APP_AWS_SECRET,
       },
     });
-    
-    // Using userName parameter instead of taskData.name
-    const fileKey = `${userName}-temp`;
     
     // const command = new PutObjectCommand({
     //   Bucket: "mp-portal",

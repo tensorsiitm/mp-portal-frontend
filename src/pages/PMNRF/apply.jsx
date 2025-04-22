@@ -67,7 +67,7 @@ const Apply = () => {
     try {
       let fileUrl = ''
       if(file) {
-        fileUrl = await fileUrlGenerator(file, office)
+        fileUrl = await fileUrlGenerator(file, `${office}-temp`)
       }
       await createApplicationMutation({
         variables: {

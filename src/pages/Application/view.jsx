@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useCreateCommentMutation, useGetApplicationsQuery } from '../../generated/graphql.tsx';
+import fileUrlGenerator from '../../utils/fileUpload.js';
 
 const ApplicationView = () => {
   const [applications, setApplications] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [commentInputs, setCommentInputs] = useState({});
+  const [commentFiles, setCommentFiles] = useState({});
   const [showCommentBoxes, setShowCommentBoxes] = useState({});
   const { data } = useGetApplicationsQuery();
 
@@ -24,25 +26,6 @@ const ApplicationView = () => {
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleAddComment = async (appId, comment) => {
-    // you will write this function
-      const put = await createCommentMutation({variables: {
-        data: {
-          appId, comment
-        }
-      }})
-
-      if(put.data.createComment) {
-        alert("Comment added")
-        setApplications((prev) => prev.map((app) =>
-          app.appId === appId
-            ? {
-                ...app,
-                comments: [...(app.comments || []), comment],
-              }
-            : app))
-      }
-  };
 
   const toggleCommentBox = (appId) => {
     setShowCommentBoxes(prev => ({
@@ -58,12 +41,38 @@ const ApplicationView = () => {
     }));
   };
 
-  const submitComment = (appId) => {
+  const submitComment = async (appId) => {
+    const [count, type, office, year] = appId.split("/");
     const comment = commentInputs[appId];
-    if (comment && comment.trim()) {
-      handleAddComment(appId, comment.trim());
-      setCommentInputs(prev => ({ ...prev, [appId]: '' }));
-      setShowCommentBoxes(prev => ({ ...prev, [appId]: false }));
+    const file = commentFiles[appId];
+
+    if (!comment && !file) return;
+
+    let finalComment = comment || "";
+
+    if (file) {
+      const uploadedUrl = await fileUrlGenerator(file, `${office}/${year}/${type}/${count}/${Date.now()}`);
+      finalComment += ` [File](${uploadedUrl})`; // Markdown style or just raw link
+    }
+
+    const put = await createCommentMutation({
+      variables: { data: { appId, comment: finalComment } },
+    });
+
+    if (put.data?.createComment) {
+      alert("Comment added");
+
+      setApplications((prev) =>
+        prev.map((app) =>
+          app.appId === appId
+            ? { ...app, comments: [...(app.comments || []), finalComment] }
+            : app
+        )
+      );
+
+      setCommentInputs((prev) => ({ ...prev, [appId]: '' }));
+      setCommentFiles((prev) => ({ ...prev, [appId]: null }));
+      setShowCommentBoxes((prev) => ({ ...prev, [appId]: false }));
     }
   };
 
@@ -96,16 +105,33 @@ const ApplicationView = () => {
             <p><strong>Expected Expenditure:</strong> {item.expectedExpenditure}</p>
 
             {/* Comments */}
-            {item.comments && item.comments.length > 0 && (
-              <div className="mt-4">
-                <strong>Comments:</strong>
-                <ul className="list-disc list-inside mt-1">
-                  {item.comments.map((comment, i) => (
-                    <li key={i}>{comment}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+           <ul className="list-disc list-inside mt-1">
+              {item.comments && item.comments.map((comment, i) => {
+                const parts = comment.split(/(\[File\]\(.*?\))/g); // Splits markdown-style links
+
+                return (
+                  <li key={i}>
+                    {parts.map((part, index) => {
+                      const match = part.match(/\[File\]\((.*?)\)/);
+                      if (match) {
+                        return (
+                          <a
+                            key={index}
+                            href={match[1]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline ml-1"
+                          >
+                            [View File]
+                          </a>
+                        );
+                      }
+                      return <span key={index}>{part}</span>;
+                    })}
+                  </li>
+                );
+              })}
+            </ul>
 
             {/* Add Comment Button */}
             <button
@@ -124,6 +150,23 @@ const ApplicationView = () => {
                   placeholder="Enter your comment..."
                   className="p-2 border rounded-lg w-full resize-none"
                 />
+
+                <input
+                  type="file"
+                  accept=".pdf,.jpg,.png,.docx"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    setCommentFiles((prev) => ({ ...prev, [item.appId]: file }));
+                  }}
+                  className="text-sm"
+                />
+
+                {commentFiles[item.appId] && (
+                  <span className="text-sm text-gray-600">
+                    Attached: {commentFiles[item.appId].name}
+                  </span>
+                )}
+
                 <button
                   onClick={() => submitComment(item.appId)}
                   className="self-start px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
