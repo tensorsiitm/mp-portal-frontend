@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         judson: ['Judson', 'serif'],
+        serif: ['\"Times New Roman\"', 'serif'],
         raleway: ['Raleway', 'sans-serif'], 
         redHat: ['"Red Hat Text"', 'sans-serif'], 
       },

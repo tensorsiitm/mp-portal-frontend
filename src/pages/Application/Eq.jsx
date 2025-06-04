@@ -89,149 +89,117 @@ const Eq = () => {
     <div>
       {/* TEMPLATE */}
 
-      <div
-        ref={pdfRef}
-        style={{
-          width: "794px", // A4 width in pixels
-          height: "1123px", // A4 height in pixel
-          background: "#fff",
-          fontSize: "16px",
-        }}
-        className="w-[] absolute z-[-100]  mx-auto border py-[1%] px-[3%] border-gray-300  bg-white font-serif"
-      >
-        <div className="flex justify-between items-start mb-4 ">
-          <div className="flex flex-col">
-            <h1 className="text-green-800 font-bold text-xl">DEAN KURIAKOSE</h1>
-            <p className="text-sm">Member of Parliament</p>
-            <p className="text-sm">(Lok Sabha)</p>
-            <p className="text-sm">Idukki, Kerala</p>
+      <div  ref={pdfRef} className="bg-white  text-black px-10 pt-2 pb-6  absolute z-[-100]" style={{ width: "794px", height: "1123px" }}>
+      {/* Header */}
+      <div className="text-center text-[#268f49]">
+        <img src="/sathyameva.png" alt="Emblem" className="mx-auto h-[150px]" />
+        <h1 style={{ fontFamily: '"Bookman Old Style", serif' }} className="text-3xl font-bold mt-">ADV. DEAN KURIAKOSE</h1>
+        <p className="-mt-1 text-xl font-serif">Member of Parliament (Lok Sabha)</p>
+        <p className="text-xl font-serif">IDUKKI - KERALA</p>
+      </div>
 
-            <div className="mt-2">
-              <p className="text-sm font-bold text-green-800">Member:</p>
-              <p className="text-sm text-green-800">
-                Standing Committee on Labour
-              </p>
-              <p className="text-sm text-green-800">
-                Consultive Committee on Rural Development
-              </p>
-            </div>
-          </div>
+      <div className="mt-4 text-md font-semibold">
+        <p className="italic"  style={{ fontFamily: '"Book Antiqua", Palatino, serif' }}>501/EQ/TDPA/2025</p>
 
-          <div className="mx-4">
-            <img
-              src="/sathyamlogo.png"
-              alt="National Emblem"
-              className="w-[20vh] mt-[5vh] h-[20vh]"
-            />
-          </div>
+        <p className="font-semibold mt-2"  style={{ fontFamily: '"Book Antiqua", Palatino, serif' }}>The Sr. Divisional Commercial Manager</p>
+        <p style={{ fontFamily: '"Book Antiqua", Palatino, serif' }}>{area}</p>
 
-          <div className="text-right text-sm">
-            <p>90, South Avenue</p>
-            <p>New Delhi - 110 011</p>
-            <p>Mob : 9447877369</p>
-            <p>011-23011030</p>
-            <p>E-mail : deankuriakosemp@gmail.com</p>
-            <p>dean.kuriakose@sansad.nic.in</p>
-          </div>
+        <p className="mt-4 font-semibold"  style={{ fontFamily: '"Book Antiqua", Palatino, serif' }}>Dear Manager,</p>
+
+        <p style={{ fontFamily: '"Book Antiqua", Palatino, serif' }} className="mt-4 font-md font-medium text-justify">
+         &nbsp;&nbsp;&nbsp; The following passenger is making an emergency travel and the ticket is waitlisted.
+          Considering the exigent nature of the journey, I would request you to kindly be
+          pleased to release an emergency quota for the same.
+        </p>
+<div className="w-full  flex justify-center">
+
+
+        <table  style={{ fontFamily: '"Book Antiqua", Palatino, serif' }} className="w-[80%] mt-4 text-md border border-black border-collapse">
+          <tbody>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Train No & Name</td>
+              <td className="border border-black px-1 pb-2">{trainNumber}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Date of journey</td>
+              <td className="border border-black px-1 pb-2">{dateOfJourney}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">PNR No</td>
+              <td className="border border-black px-1 pb-2">{pnrNumber}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Class</td>
+              <td className="border border-black px-1 pb-2">{travelClass}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Boarding from</td>
+              <td className="border border-black px-1 pb-2">{boardingFrom}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Reserved up to</td>
+              <td className="border border-black px-1 pb-2">{reservedUpTo}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Name of the passenger</td>
+              <td className="border border-black px-1 pb-2">{name}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Number of seats</td>
+              <td className="border border-black px-1 pb-2">{numberOfSeats}</td>
+            </tr>
+            <tr className="border border-black">
+              <td className="border border-black px-1 pb-2 font-medium bg-[#d9d9d9]">Contact no of the passenger</td>
+              <td className="border border-black px-1 pb-2">{contactNumber}</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+<div className="w-full mt-2 flex justify-around">
+   <div className="">
+          <img src="/seal.png" alt="Stamp" className="w-[200px]" />
         </div>
 
-        <div className="text-center border border-red-600 text-red-600 font-bold mb-4 w-36  py-[2vh]  mx-auto">
-          TOP URGENT
+
+ <div className=""  style={{ fontFamily: '"Book Antiqua", Palatino, serif' }}>
+                  <p className="mt-4"  style={{ fontFamily: '"Book Antiqua", Palatino, serif' }}>Thanks & Regards</p>
+          <img src="/sign.jpg" alt="Signature" className="absolute h-[110px]" />
+          <p className="font-semibold mt-16">Adv. Dean Kuriakose</p>
         </div>
 
-        <div className="text-right mb-4">
-          <p>19.01-2025</p>
-        </div>
 
-        <div className="mb-4">
-          <p className="font-bold">The Sr. Divisional</p>
-          <p className="font-bold">Commercial Manager,</p>
-          <p className="font-bold">Southern Railway</p>
-        </div>
+  
+</div>
 
-        <div className="mb-4">
-          <p>Dear Commercial Manager,</p>
-        </div>
+       
 
-        <div className="mb-4 ">
-          <p className="text-justify">
-            The following passenger is making an emergency travel and his ticket
-            is waitlisted. Considering the exigent nature their journey, I would
-            request you to kindly be pleased to release an emergency quota for
-            the same.
+   
+
+        <div style={{ fontFamily: 'Calibri, sans-serif' }} className=" text-[#59a774] mt- pt-1 text-sm font-medium text-center">
+          <p className="">
+            Member : Standing Committee - Education, Women, Children, Youth & Sports | Consultative Committee - Road and Transport
           </p>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="col-span-2">1. Train No & Name</div>
-          <div className="col-span-1">: {trainNumber}</div>
-
-          <div className="col-span-2">2. Date of journey</div>
-          <div className="col-span-1">: {dateOfJourney}</div>
-
-          <div className="col-span-2">3. PNR No</div>
-          <div className="col-span-1">: {pnrNumber}</div>
-
-          <div className="col-span-2">4. className</div>
-          <div className="col-span-1">: {travelClass}</div>
-
-          <div className="col-span-2">5. Boarding from</div>
-          <div className="col-span-1">: {boardingFrom}</div>
-
-          <div className="col-span-2">6. Reserved up to</div>
-          <div className="col-span-1">: {reservedUpTo}</div>
-
-          <div className="col-span-2">
-            7. Name of party along with official-
-            <br />
-            status, wherever applicable
-          </div>
-          <div className="col-span-1">
-            :{name}+{numberOfSeats - 1}
-          </div>
-
-          <div className="col-span-2">8. No. of Births/Seats required</div>
-          <div className="col-span-1">: {numberOfSeats}</div>
-
-          <div className="col-span-2">9. Contact no</div>
-          <div className="col-span-1">: {contactNumber}</div>
-        </div>
-
-        <div className="flex justify-between items-center mt-8">
-          <div className="w-24 h-24">
-            <img
-              src="/sathyamlogo.png"
-              alt="Official Seal"
-              className="w-full h-full rounded-full bg-green-100"
-            />
-          </div>
-
-          <div className="text-right">
-            <p>Thanks & Regards</p>
-            <div className="h-12 w-32 mt-2 mb-2 ml-auto">
-              <img src="/sign.png" alt="Signature" className="ml-auto" />
-            </div>
-            <p className="font-bold">Adv. Dean Kuriakose</p>
-          </div>
-        </div>
-
-        <div className="mt-12 text-center text-xs text-green-800 border-t pt-4">
+          {/* <span className="border-b border-[#59a774] w-full"></span> */}
           <p>
-            MP Office: 1. Opp. PWD Guest House, Telephone Exchange Road,
-            Thodupuzha PO
+            90, South Avenue, New Delhi - 110 011 | Phone : 011-23011030 | Mob. : +91 – 9447877369
           </p>
-          <p>Idukki Distt., Kerala - 685584 | Phone: 0486-222266</p>
           <p>
-            MP Office: 2. Aalikunnel Building, Idukki Colony PO, Cheruthoni,
-            Kerala-685602
+            E-mail : <a href="mailto:deankuriakosemp@gmail.com" className="text-blue-600 underline">deankuriakosemp@gmail.com</a> |
+            <a href="mailto:dean.kuriakose@sansad.nic.in" className="text-blue-600 underline">dean.kuriakose@sansad.nic.in</a>
           </p>
-          <p>Phone: 0486-222266</p>
+          <p>
+            • Opp. PWD Rest House, Telephone Exchange Road, Thodupuzha P.O, Idukki, Kerala PIN – 685 584 Ph. : 04862–222266
+          </p>
+          <p>
+            • Aliakunnel Bldg., Idukki Colony P.O, Cheruthoni, Idukki, PIN - Kerala 685 602 Ph. : 04862-236266
+          </p>
         </div>
       </div>
+    </div>
 
       {/* MAIN SECTION */}
 
-      <div className="mt-4 w-[100vw] h-[] py-[5vh] justify-center items-center bg-white">
+      <div className="mt-4   w-[100vw] h-[] py-[5vh] justify-center items-center bg-white">
         <h2 className="text-3xl text-[#1c5dca] font-bold text-center">EQ</h2>
         <form
           className="w-[100vw] px-[15vw] flex flex-col gap-[3vh]"
@@ -254,22 +222,42 @@ const Eq = () => {
                 required
               />
             </div>
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-lg font-medium text-gray-700"
-              >
-                AREA:
-              </label>
-              <input
-                type="text"
-                id="area"
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                className="mt-1 block w-full bg-[] h-[45px] rounded-xl border-2 border-[#1c5dca] px-[8px]"
-                required
-              />
-            </div>
+           <div>
+  <label
+    htmlFor="area"
+    className="block text-lg font-medium text-gray-700"
+  >
+    AREA:
+  </label>
+  <select
+    id="area"
+    value={area}
+    onChange={(e) => setArea(e.target.value)}
+    className="mt-1 block w-full h-[45px] rounded-xl border-2 border-[#1c5dca] px-[8px]"
+    required
+  >
+    <option value="">Select an Area</option>
+    <option value="Southern Railway">Southern Railway</option>
+    <option value="Central Railway">Central Railway</option>
+    <option value="Western Railway">Western Railway</option>
+    <option value="Eastern Railway">Eastern Railway</option>
+    <option value="Northern Railway">Northern Railway</option>
+    <option value="North Eastern Railway">North Eastern Railway</option>
+    <option value="South Eastern Railway">South Eastern Railway</option>
+    <option value="Northeast Frontier Railway">Northeast Frontier Railway</option>
+    <option value="South Central Railway">South Central Railway</option>
+    <option value="South Coast Railway">South Coast Railway</option>
+    <option value="Konkan Railway">Konkan Railway</option>
+    <option value="East Central Railway">East Central Railway</option>
+    <option value="South East Central Railway">South East Central Railway</option>
+    <option value="North Western Railway">North Western Railway</option>
+    <option value="East Coast Railway">East Coast Railway</option>
+    <option value="North Central Railway">North Central Railway</option>
+    <option value="South Western Railway">South Western Railway</option>
+    <option value="West Central Railway">West Central Railway</option>
+  </select>
+</div>
+
 
             <div className="mt-[3vh]">
               <label
